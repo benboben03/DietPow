@@ -1,0 +1,92 @@
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, View } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
+const BasicInputScreen = ({ navigation }) => {
+    console.log("BasicInfoInput rendered");
+
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
+
+    const handlePress = () => {
+        console.log('Button pressed (BasicInfoInput -> AdvancedInfoInput)');
+        navigation.navigate('AdvancedInfoInput');
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo} />
+            <Text style={styles.infoText}>Before getting started, we'll need to know some basic information first.</Text>
+            <TextInput style={styles.input} placeholder="Enter your name" placeholderTextColor="#666" />
+            <View style={styles.pickerContainer}>
+                <Picker
+                    selectedValue={age}
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => setAge(itemValue)}>
+                    {[...Array(81).keys()].map((age) => (
+                        <Picker.Item key={age} label={`${age}`} value={age} />
+                    ))}
+                </Picker>
+            </View>
+            <View style={styles.pickerContainer}>
+                <Picker
+                    selectedValue={gender}
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => setGender(itemValue)}>
+                    <Picker.Item label="Male" value="male" />
+                    <Picker.Item label="Female" value="female" />
+                    <Picker.Item label="Neither" value="neither" />
+                </Picker>
+            </View>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
+                <Text style={styles.buttonText}>Next</Text>
+            </TouchableOpacity>
+            <StatusBar style="auto" />
+        </SafeAreaView>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#11BCF5',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    backgroundImage: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
+    },
+    infoText: {
+      color: '#FFF',
+      textAlign: 'center',
+      marginBottom: 20,
+      fontSize: 21,
+    },
+    input: {
+      backgroundColor: '#FFF',
+      borderRadius: 20,
+      width: '80%',
+      padding: 15,
+      marginBottom: 10,
+      fontSize: 18,
+      color: '#333',
+    },
+    button: {
+      backgroundColor: '#FF7300',
+      paddingVertical: 15,
+      paddingHorizontal: 30,
+      borderRadius: 30,
+      marginBottom: 20,
+    },
+    buttonText: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+  });
+
+export default BasicInputScreen;
