@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, View, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import {AgePicker} from './pickers/AgePicker';
 
 const BasicInputScreen = ({ navigation }) => {
     console.log("BasicInfoInput rendered");
 
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    const [chooseAge, setchooseAge] = useState('Select Age...')
+    const [isModalVisible, setisModalVisible] = useState(false)
+
+    const changeModalVisibility = (bool) => {
+      setisModalVisible(bool)
+    }
 
     const handlePress = () => {
         console.log('Button pressed (BasicInfoInput -> AdvancedInfoInput)');
@@ -19,29 +24,31 @@ const BasicInputScreen = ({ navigation }) => {
             <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo} />
             <Text style={styles.infoText}>Before getting started, we'll need to know some basic information first.</Text>
             <TextInput style={styles.input} placeholder="Enter your name" placeholderTextColor="#666" />
-            <View style={styles.pickerContainer}>
-                <Picker
-                    selectedValue={age}
-                    style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) => setAge(itemValue)}>
-                    {[...Array(81).keys()].map((age) => (
-                        <Picker.Item key={age} label={`${age}`} value={age} />
-                    ))}
-                </Picker>
-            </View>
-            <View style={styles.pickerContainer}>
-                <Picker
-                    selectedValue={gender}
-                    style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) => setGender(itemValue)}>
-                    <Picker.Item label="Male" value="male" />
-                    <Picker.Item label="Female" value="female" />
-                    <Picker.Item label="Neither" value="neither" />
-                </Picker>
-            </View>
+            
+            <TouchableOpacity
+              onPress={() => changeModalVisibility(true)}
+              style={styles.touchableOpacity}
+            >
+              <Text style={styles.text}>{chooseAge}</Text>
+
+            </TouchableOpacity>
+
+            <Modal
+              transparent={true}
+              animationType='fade'
+              visible={isModalVisible}
+              nRequestClose={() => changeModalVisibility(false)}
+            >
+              <ModalPicker
+                changeModalVisibility={changeModalVisibility}
+              />
+
+            </Modal>
+
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
+
             <StatusBar style="auto" />
         </SafeAreaView>
     );
