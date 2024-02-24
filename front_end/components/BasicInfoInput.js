@@ -19,6 +19,10 @@ const BasicInputScreen = ({ navigation }) => {
         navigation.navigate('AdvancedInfoInput');
     };
 
+    const setData = (option) => {
+      setchooseAge(option)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo} />
@@ -39,8 +43,9 @@ const BasicInputScreen = ({ navigation }) => {
               visible={isModalVisible}
               nRequestClose={() => changeModalVisibility(false)}
             >
-              <ModalPicker
+              <AgePicker
                 changeModalVisibility={changeModalVisibility}
+                setData={setData}
               />
 
             </Modal>
