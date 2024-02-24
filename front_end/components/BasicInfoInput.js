@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, View, Modal } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal } from 'react-native';
 import {AgePicker} from './pickers/AgePicker';
+import {GenderPicker} from './pickers/GenderPicker';
 
 const BasicInputScreen = ({ navigation }) => {
     console.log("BasicInfoInput rendered");
 
-    const [chooseAge, setchooseAge] = useState('Select Age...')
-    const [isModalVisible, setisModalVisible] = useState(false)
+    const [chooseAge, setchooseAge] = useState('Select Age')
+    const [chooseGender, setchooseGender] = useState('Select Gender')
+    const [isAgeVisible, setisAgeVisible] = useState(false)
+    const [isGenderVisible, setisGenderVisible] = useState(false)
 
-    const changeModalVisibility = (bool) => {
-      setisModalVisible(bool)
+    const changeAgeVisibility = (bool) => {
+        setisAgeVisible(bool)
+    }
+
+    const changeGenderVisibility = (bool) => {
+        setisGenderVisible(bool)
     }
 
     const handlePress = () => {
@@ -19,18 +25,33 @@ const BasicInputScreen = ({ navigation }) => {
         navigation.navigate('AdvancedInfoInput');
     };
 
-    const setData = (option) => {
-      setchooseAge(option)
+    const setAge = (option) => {
+      setchooseAge(option);
+    }
+
+    const setGender = (option) => {
+        setchooseGender(option);
+    }
+
+    const handleNameTextChange = (text) => {
+        console.log("User entered text for name: ");
+        console.log(text);
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo} />
             <Text style={styles.infoText}>Before getting started, we'll need to know some basic information first.</Text>
-            <TextInput style={styles.input} placeholder="Enter your name" placeholderTextColor="#666" />
-            
+            <TextInput
+                style={styles.input}
+                placeholder="Enter your name"
+                placeholderTextColor="#666"
+                onChangeText={handleNameTextChange}
+            />
+
+            <Text style={styles.infoText}>Select your age (in years)</Text>
             <TouchableOpacity
-              onPress={() => changeModalVisibility(true)}
+              onPress={() => changeAgeVisibility(true)}
               style={styles.touchableOpacity}
             >
               <Text style={styles.text}>{chooseAge}</Text>
@@ -40,16 +61,38 @@ const BasicInputScreen = ({ navigation }) => {
             <Modal
               transparent={true}
               animationType='fade'
-              visible={isModalVisible}
-              nRequestClose={() => changeModalVisibility(false)}
+              visible={isAgeVisible}
+              nRequestClose={() => changeAgeVisibility(false)}
             >
               <AgePicker
-                changeModalVisibility={changeModalVisibility}
-                setData={setData}
+                changeModalVisibility={changeAgeVisibility}
+                setData={setAge}
               />
 
             </Modal>
 
+            <Text style={styles.infoText}>{"\n"}Select your sex</Text>
+            <TouchableOpacity
+              onPress={() => changeGenderVisibility(true)}
+            >
+              <Text style={styles.text}>{chooseGender}</Text>
+
+            </TouchableOpacity>
+
+            <Modal
+              transparent={true}
+              animationType='fade'
+              visible={isGenderVisible}
+              nRequestClose={() => changeGenderVisibility(false)}
+            >
+              <GenderPicker
+                changeModalVisibility={changeGenderVisibility}
+                setData={setGender}
+              />
+
+            </Modal>
+
+            <Text style={styles.infoText}></Text>
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
