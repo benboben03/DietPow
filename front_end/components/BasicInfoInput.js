@@ -7,17 +7,17 @@ import {GenderPicker} from './pickers/GenderPicker';
 const BasicInputScreen = ({navigation}) => {
     console.log("BasicInfoInput rendered");
 
-    const [chooseAge, setchooseAge] = useState('Select Age')
-    const [chooseGender, setchooseGender] = useState('Select Gender')
-    const [isAgeVisible, setisAgeVisible] = useState(false)
-    const [isGenderVisible, setisGenderVisible] = useState(false)
+    const [chooseAge, setChooseAge] = useState('Select Age')
+    const [chooseGender, setChooseGender] = useState('Select Gender')
+    const [isAgeVisible, setIsAgeVisible] = useState(false)
+    const [isGenderVisible, setIsGenderVisible] = useState(false)
 
     const changeAgeVisibility = (bool) => {
-        setisAgeVisible(bool)
+        setIsAgeVisible(bool)
     }
 
     const changeGenderVisibility = (bool) => {
-        setisGenderVisible(bool)
+        setIsGenderVisible(bool)
     }
 
     const handlePress = () => {
@@ -26,11 +26,15 @@ const BasicInputScreen = ({navigation}) => {
     };
 
     const setAge = (option) => {
-        setchooseAge(option);
+        console.log("User chose age: ");
+        console.log(option);
+        setChooseAge(option);
     }
 
     const setGender = (option) => {
-        setchooseGender(option);
+        console.log("User chose gender: ");
+        console.log(option);
+        setChooseGender(option);
     }
 
     const handleNameTextChange = (text) => {
@@ -41,7 +45,7 @@ const BasicInputScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo}/>
-            <Text style={styles.infoText}>Before getting started, we'll need to know some basic information
+            <Text style={styles.infoText}>Before getting started, we'll{"\n"}need to know some basic information
                 first.</Text>
             <TextInput
                 style={styles.input}
@@ -72,7 +76,7 @@ const BasicInputScreen = ({navigation}) => {
 
             </Modal>
 
-            <Text style={styles.infoText}>{"\n"}Select your sex</Text>
+            <Text style={styles.infoText}>Select your sex</Text>
             <TouchableOpacity
                 onPress={() => changeGenderVisibility(true)}
             >
@@ -94,7 +98,6 @@ const BasicInputScreen = ({navigation}) => {
 
             </Modal>
 
-            <Text style={styles.infoText}></Text>
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
@@ -121,7 +124,14 @@ const styles = StyleSheet.create({
         color: '#FFF',
         textAlign: 'center',
         marginBottom: 20,
-        fontSize: 21,
+        fontSize: 25,
+        fontWeight: 'bold',
+    },
+    text: {
+        color: '#944309',
+        textAlign: 'center',
+        marginBottom: 20,
+        fontSize: 20,
     },
     input: {
         backgroundColor: '#FFF',
