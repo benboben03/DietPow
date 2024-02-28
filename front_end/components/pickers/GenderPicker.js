@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modal: {
-        backgroundColor: 'white',
+        backgroundColor: '#e0e0e0',
         borderRadius: 10
     },
     option: {
