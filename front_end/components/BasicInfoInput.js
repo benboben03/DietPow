@@ -59,7 +59,7 @@ const BasicInputScreen = ({navigation}) => {
                 onPress={() => changeAgeVisibility(true)}
                 style={styles.touchableOpacity}
             >
-                <Text style={styles.text}>{chooseAge}</Text>
+                <Text style={styles.optionText}>{chooseAge}</Text>
 
             </TouchableOpacity>
 
@@ -79,8 +79,9 @@ const BasicInputScreen = ({navigation}) => {
             <Text style={styles.infoText}>Select your sex</Text>
             <TouchableOpacity
                 onPress={() => changeGenderVisibility(true)}
+                style={styles.touchableOpacity}
             >
-                <Text style={styles.text}>{chooseGender}</Text>
+                <Text style={styles.optionText}>{chooseGender}</Text>
 
             </TouchableOpacity>
 
@@ -98,6 +99,7 @@ const BasicInputScreen = ({navigation}) => {
 
             </Modal>
 
+            <Text></Text>
             <TouchableOpacity style={styles.button} onPress={handlePress}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
@@ -123,14 +125,14 @@ const styles = StyleSheet.create({
     infoText: {
         color: '#FFF',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: 10,
         fontSize: 25,
         fontWeight: 'bold',
     },
-    text: {
-        color: '#944309',
+    optionText: {
+        color: '#000000',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: 0,
         fontSize: 20,
     },
     input: {
@@ -153,6 +155,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    touchableOpacity: {
+        borderRadius: 25,
+        backgroundColor: '#ffffff',
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        alignItems: 'center',
     },
 });
 
