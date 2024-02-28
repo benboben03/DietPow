@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, ScrollView, Dimensions} from 'react-native';
 
 const OPTIONS = ['Male', 'Female', 'Non-specified']
 
@@ -31,7 +31,7 @@ const GenderPicker = (props) => {
             onPress={() => props.changeModalVisibility(false)}
             style={styles.container}
         >
-            <View style={[styles.modal, {width: WIDTH - 200, height: HEIGHT/4}]}>
+            <View style={[styles.modal, {width: WIDTH - 200, height: HEIGHT / 4}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>

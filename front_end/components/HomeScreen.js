@@ -1,6 +1,6 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({navigation}) => {
     console.log("HomeScreen rendered");
 
     return (

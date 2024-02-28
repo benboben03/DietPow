@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal } from 'react-native';
+import React, {useState} from 'react';
+import {StatusBar} from 'expo-status-bar';
+import {StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal} from 'react-native';
 import {AgePicker} from './pickers/AgePicker';
 import {GenderPicker} from './pickers/GenderPicker';
 
-const BasicInputScreen = ({ navigation }) => {
+const BasicInputScreen = ({navigation}) => {
     console.log("BasicInfoInput rendered");
 
     const [chooseAge, setchooseAge] = useState('Select Age')
@@ -26,7 +26,7 @@ const BasicInputScreen = ({ navigation }) => {
     };
 
     const setAge = (option) => {
-      setchooseAge(option);
+        setchooseAge(option);
     }
 
     const setGender = (option) => {
@@ -40,8 +40,9 @@ const BasicInputScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo} />
-            <Text style={styles.infoText}>Before getting started, we'll need to know some basic information first.</Text>
+            <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo}/>
+            <Text style={styles.infoText}>Before getting started, we'll need to know some basic information
+                first.</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Enter your name"
@@ -51,44 +52,45 @@ const BasicInputScreen = ({ navigation }) => {
 
             <Text style={styles.infoText}>Select your age (in years)</Text>
             <TouchableOpacity
-              onPress={() => changeAgeVisibility(true)}
-              style={styles.touchableOpacity}
+                onPress={() => changeAgeVisibility(true)}
+                style={styles.touchableOpacity}
             >
-              <Text style={styles.text}>{chooseAge}</Text>
+                <Text style={styles.text}>{chooseAge}</Text>
 
             </TouchableOpacity>
 
             <Modal
-              transparent={true}
-              animationType='fade'
-              visible={isAgeVisible}
-              nRequestClose={() => changeAgeVisibility(false)}
+                transparent={true}
+                animationType='fade'
+                visible={isAgeVisible}
+                nRequestClose={() => changeAgeVisibility(false)}
             >
-              <AgePicker
-                changeModalVisibility={changeAgeVisibility}
-                setData={setAge}
-              />
+                <AgePicker
+                    changeModalVisibility={changeAgeVisibility}
+                    setData={setAge}
+                />
 
             </Modal>
 
             <Text style={styles.infoText}>{"\n"}Select your sex</Text>
             <TouchableOpacity
-              onPress={() => changeGenderVisibility(true)}
+                onPress={() => changeGenderVisibility(true)}
             >
-              <Text style={styles.text}>{chooseGender}</Text>
+                <Text style={styles.text}>{chooseGender}</Text>
 
             </TouchableOpacity>
 
             <Modal
-              transparent={true}
-              animationType='fade'
-              visible={isGenderVisible}
-              nRequestClose={() => changeGenderVisibility(false)}
+                transparent={true}
+                animationType='fade'
+                visible={isGenderVisible}
+                nRequestClose={() => changeGenderVisibility(false)}
             >
-              <GenderPicker
-                changeModalVisibility={changeGenderVisibility}
-                setData={setGender}
-              />
+
+                <GenderPicker
+                    changeModalVisibility={changeGenderVisibility}
+                    setData={setGender}
+                />
 
             </Modal>
 
@@ -97,51 +99,51 @@ const BasicInputScreen = ({ navigation }) => {
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
 
-            <StatusBar style="auto" />
+            <StatusBar style="auto"/>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#11BCF5',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#11BCF5',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     backgroundImage: {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      resizeMode: 'cover',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
     },
     infoText: {
-      color: '#FFF',
-      textAlign: 'center',
-      marginBottom: 20,
-      fontSize: 21,
+        color: '#FFF',
+        textAlign: 'center',
+        marginBottom: 20,
+        fontSize: 21,
     },
     input: {
-      backgroundColor: '#FFF',
-      borderRadius: 20,
-      width: '80%',
-      padding: 15,
-      marginBottom: 10,
-      fontSize: 18,
-      color: '#333',
+        backgroundColor: '#FFF',
+        borderRadius: 20,
+        width: '80%',
+        padding: 15,
+        marginBottom: 10,
+        fontSize: 18,
+        color: '#333',
     },
     button: {
-      backgroundColor: '#FF7300',
-      paddingVertical: 15,
-      paddingHorizontal: 30,
-      borderRadius: 30,
-      marginBottom: 20,
+        backgroundColor: '#FF7300',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        borderRadius: 30,
+        marginBottom: 20,
     },
     buttonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
-  });
+});
 
 export default BasicInputScreen;

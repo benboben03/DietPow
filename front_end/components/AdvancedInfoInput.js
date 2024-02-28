@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react-native';
 
-const AdvancedInfoScreen = ({ navigation }) => {
+const AdvancedInfoScreen = ({navigation}) => {
     console.log("AdvancedInfoInput rendered");
 
     const handlePress = () => {
@@ -25,7 +25,8 @@ const AdvancedInfoScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.infoText}> Now that we have the basics,{"\n"}please input your current{"\n"}biometrics </Text>
+            <Text style={styles.infoText}> Now that we have the basics,{"\n"}please input your
+                current{"\n"}biometrics </Text>
             <TextInput
                 style={styles.input}
                 placeholder="Enter your height (in inches)"
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#11BCF5',
         alignItems: 'center',
         justifyContent: 'center',
-      },
+    },
     infoText: {
         color: '#FFF',
         textAlign: 'center',
