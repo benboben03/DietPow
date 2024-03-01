@@ -15,6 +15,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+/*
+This is the introduction pages that the user sees when they open the app
+for the first time. After the user presses the Finish button on the last
+page, they will be redirected to the main app tab pages.
+ */
 const IntroStack = ({ navigator, onIntroComplete }) => (
     <Stack.Navigator>
         <Stack.Screen
@@ -42,14 +47,16 @@ const IntroStack = ({ navigator, onIntroComplete }) => (
 );
 
 const AppNavigator = () => {
-    const [showIntro, setShowIntro] = useState(true);
 
+    // Handles if the intro pages should be shown or not
+    const [showIntro, setShowIntro] = useState(true);
     const handleIntroComplete = () => {
         setShowIntro(false);
     }
 
     return (
         <NavigationContainer>
+            {/* If intro not shown yet, show it */}
             {showIntro ? (
                 <Stack.Navigator>
                     <Stack.Screen
@@ -66,10 +73,10 @@ const AppNavigator = () => {
                 </Stack.Navigator>
             ) : (
                 <Tab.Navigator
+                    // Renders the tab bar on the bottom of the app
                     screenOptions={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName;
-
                             if (route.name === 'Home') {
                                 iconName = focused ? 'home' : 'home-outline';
                             } else if (route.name === 'Your Goals') {

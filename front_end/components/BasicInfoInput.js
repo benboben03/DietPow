@@ -66,6 +66,7 @@ const BasicInputScreen = ({navigation}) => {
 
             </TouchableOpacity>
 
+            {/*Controls the pop-up picker for age*/}
             <Modal
                 transparent={true}
                 animationType='fade'
@@ -88,6 +89,7 @@ const BasicInputScreen = ({navigation}) => {
 
             </TouchableOpacity>
 
+            {/*Controls the pop-up picker for gender*/}
             <Modal
                 transparent={true}
                 animationType='fade'
@@ -102,6 +104,7 @@ const BasicInputScreen = ({navigation}) => {
 
             </Modal>
 
+            {/*Button to navigate to the next page*/}
             <Text></Text>
             <TouchableOpacity style={styles.button} onPress={navigateToAdvancedInfoInput}>
                 <Text style={styles.buttonText}>Next</Text>
