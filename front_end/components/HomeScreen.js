@@ -1,4 +1,5 @@
-import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
+import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity} from 'react-native';
+import React from "react";
 
 const HomeScreen = () => {
     console.log("HomeScreen rendered");
@@ -9,12 +10,14 @@ const HomeScreen = () => {
                 <Text style={styles.quoteHeaderText}>Today's Quote</Text>
 
                 {/*TODO pull quotes from database*/}
-                <Text style={styles.quoteText}>"Take care of your body, it's the only place you have to live in."{"\n"}</Text>
+                <Text style={styles.quoteText}>"Take care of your body, it's the only place you have to live in."</Text>
 
                 <Text style={styles.titleText}>Your Health Home</Text>
             </View>
             <View style={styles.bottomSection}>
-                <Text>HomeScreen TODO</Text>
+                <View style={styles.blueBackdrop}>
+                    <Text>TODO</Text>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -33,12 +36,15 @@ const styles = StyleSheet.create({
     },
     bottomSection: {
         flex: 1,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         backgroundColor: 'white',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 10
     },
     quoteHeaderText: {
-        fontSize: 30,
+        fontSize: 25,
         color: 'white',
         fontWeight: 'bold',
         textDecorationLine: 'underline'
@@ -51,7 +57,14 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: 'white',
         fontWeight: 'bold'
-    }
+    },
+    blueBackdrop: {
+        backgroundColor: '#0A9BCB',
+        flex: 1,
+        width: '100%',
+        borderRadius: 10,
+        padding: 16
+    },
 })
 
 export default HomeScreen;
