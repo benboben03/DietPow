@@ -33,3 +33,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+/.idea/.gitignore
+/.idea/front_end.iml
+/.idea/modules.xml
+/.idea/vcs.xml
