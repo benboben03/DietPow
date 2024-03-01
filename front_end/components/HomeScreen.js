@@ -15,8 +15,14 @@ const HomeScreen = () => {
                 <Text style={styles.titleText}>Your Health Home</Text>
             </View>
             <View style={styles.bottomSection}>
-                <View style={styles.blueBackdrop}>
-                    <Text>TODO</Text>
+                <View style={styles.summaryBox}>
+                    <Text style={styles.summaryHeaderText}>Your Goals</Text>
+                </View>
+                <View style={styles.summaryBox}>
+                    <Text style={styles.summaryHeaderText}>Today's Progress</Text>
+                </View>
+                <View style={styles.summaryBox}>
+                    <Text style={styles.summaryHeaderText}>History Snapshot</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -58,13 +64,20 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold'
     },
-    blueBackdrop: {
+    summaryBox: {
         backgroundColor: '#0A9BCB',
         flex: 1,
         width: '100%',
         borderRadius: 10,
-        padding: 16
+        padding: 15,
+        marginBottom: 5,
+        marginTop: 5
     },
+    summaryHeaderText: {
+        fontSize: 25,
+        color: 'white',
+        fontWeight: 'bold'
+    }
 })
 
 export default HomeScreen;
