@@ -1,12 +1,7 @@
 import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react-native';
 
-const AdvancedInfoScreen = ({navigation}) => {
+const AdvancedInfoScreen = ({onIntroComplete}) => {
     console.log("AdvancedInfoInput rendered");
-
-    const navigateToHomeScreen = () => {
-        console.log('Button pressed (AdvancedInfoOutput -> HomeScreen)');
-        navigation.navigate('HomeScreen');
-    };
 
     const handleHeightTextChange = (text) => {
         console.log("User entered text for height: ");
@@ -49,7 +44,7 @@ const AdvancedInfoScreen = ({navigation}) => {
             />
 
             <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
-            <TouchableOpacity style={styles.button} onPress={navigateToHomeScreen}>
+            <TouchableOpacity style={styles.button} onPress={onIntroComplete}>
                 <Text style={styles.buttonText}>Finish</Text>
             </TouchableOpacity>
         </SafeAreaView>
