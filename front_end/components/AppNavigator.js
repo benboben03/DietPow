@@ -15,14 +15,46 @@ const AppNavigator = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Welcome">
-                <Stack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="BasicInfoInput" component={BasicInfoInput} options={{headerShown: false}}/>
-                <Stack.Screen name="AdvancedInfoInput" component={AdvancedInfoInput} options={{headerShown: false}}/>
-                <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="GoalsScreen" component={GoalsScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="TodayScreen" component={TodayScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="HistoryScreen" component={HistoryScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="SettingsScreen" component={SettingsScreen} options={{headerShown: false}}/>
+                <Stack.Screen
+                    name="Welcome"
+                    component={WelcomeScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="BasicInfoInput"
+                    component={BasicInfoInput}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="AdvancedInfoInput"
+                    component={AdvancedInfoInput}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="HomeScreen"
+                    component={HomeScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="GoalsScreen"
+                    component={GoalsScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="TodayScreen"
+                    component={TodayScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="HistoryScreen"
+                    component={HistoryScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="SettingsScreen"
+                    component={SettingsScreen}
+                    options={{headerShown: false}}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
