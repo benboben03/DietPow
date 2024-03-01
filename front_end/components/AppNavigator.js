@@ -73,7 +73,7 @@ const AppNavigator = () => {
                             if (route.name === 'Home') {
                                 iconName = focused ? 'home' : 'home-outline';
                             } else if (route.name === 'Your Goals') {
-                                iconName = focused ? 'list' : 'list-outline';
+                                iconName = focused ? 'body' : 'body-outline';
                             } else if (route.name === 'Today') {
                                 iconName = focused ? 'today' : 'today-outline';
                             } else if (route.name === 'History') {
@@ -84,8 +84,8 @@ const AppNavigator = () => {
 
                             return <Icon name={iconName} size={size} color={color} />;
                         },
-                        activeTintColor: 'blue',
-                        inactiveTintColor: 'gray',
+                        tabBarActiveTintColor: '#11BCF5',
+                        tabBarInactiveTintColor: 'gray',
                     })}
                 >
                     <Tab.Screen
