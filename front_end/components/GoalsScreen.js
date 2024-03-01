@@ -1,6 +1,6 @@
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-const GoalsScreen = ({navigation}) => {
+const GoalsScreen = () => {
     console.log("GoalsScreen rendered");
 
     return (

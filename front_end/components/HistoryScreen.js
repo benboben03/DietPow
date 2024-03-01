@@ -1,6 +1,6 @@
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-const HistoryScreen = ({navigation}) => {
+const HistoryScreen = () => {
     console.log("HistoryScreen rendered");
 
     return (

@@ -1,6 +1,6 @@
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-const SettingsScreen = ({navigation}) => {
+const SettingsScreen = () => {
     console.log("SettingsScreen rendered");
 
     return (

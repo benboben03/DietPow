@@ -1,6 +1,6 @@
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-const TodayScreen = ({navigation}) => {
+const TodayScreen = () => {
     console.log("TodayScreen rendered");
 
     return (
