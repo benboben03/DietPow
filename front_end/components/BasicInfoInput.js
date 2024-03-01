@@ -29,17 +29,20 @@ const BasicInputScreen = ({navigation}) => {
         console.log("User chose age: ");
         console.log(option);
         setChooseAge(option);
+        // TODO link with back-end
     }
 
     const setGender = (option) => {
         console.log("User chose gender: ");
         console.log(option);
         setChooseGender(option);
+        // TODO link with back-end
     }
 
     const handleNameTextChange = (text) => {
         console.log("User entered text for name: ");
         console.log(text);
+        // TODO link with back-end
     }
 
     return (

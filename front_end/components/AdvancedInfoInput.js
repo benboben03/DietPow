@@ -6,16 +6,19 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
     const handleHeightTextChange = (text) => {
         console.log("User entered text for height: ");
         console.log(text);
+        // TODO link with back-end
     }
 
     const handleWeightTextChange = (text) => {
         console.log("User entered text for weight: ");
         console.log(text);
+        // TODO link with back-end
     }
 
     const handleGoalTextChange = (text) => {
         console.log("User entered text for goal: ");
         console.log(text);
+        // TODO link with back-end
     }
 
     return (
