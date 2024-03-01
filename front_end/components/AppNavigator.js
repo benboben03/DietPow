@@ -10,6 +10,7 @@ import TodayScreen from "./TodayScreen";
 import HistoryScreen from "./HistoryScreen";
 import SettingsScreen from "./SettingsScreen";
 import {useState} from "react";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,29 +65,51 @@ const AppNavigator = () => {
                     </Stack.Screen>
                 </Stack.Navigator>
             ) : (
-                <Tab.Navigator>
+                <Tab.Navigator
+                    screenOptions={({ route }) => ({
+                        tabBarIcon: ({ focused, color, size }) => {
+                            let iconName;
+
+                            if (route.name === 'Home') {
+                                iconName = focused ? 'home' : 'home-outline';
+                            } else if (route.name === 'Your Goals') {
+                                iconName = focused ? 'list' : 'list-outline';
+                            } else if (route.name === 'Today') {
+                                iconName = focused ? 'today' : 'today-outline';
+                            } else if (route.name === 'History') {
+                                iconName = focused ? 'time' : 'time-outline';
+                            } else if (route.name === 'Settings') {
+                                iconName = focused ? 'settings' : 'settings-outline';
+                            }
+
+                            return <Icon name={iconName} size={size} color={color} />;
+                        },
+                        activeTintColor: 'blue',
+                        inactiveTintColor: 'gray',
+                    })}
+                >
                     <Tab.Screen
-                        name="HomeScreen"
+                        name="Home"
                         component={HomeScreen}
                         options={{headerShown: false}}
                     />
                     <Tab.Screen
-                        name="GoalsScreen"
+                        name="Your Goals"
                         component={GoalsScreen}
                         options={{headerShown: false}}
                     />
                     <Tab.Screen
-                        name="TodayScreen"
+                        name="Today"
                         component={TodayScreen}
                         options={{headerShown: false}}
                     />
                     <Tab.Screen
-                        name="HistoryScreen"
+                        name="History"
                         component={HistoryScreen}
                         options={{headerShown: false}}
                     />
                     <Tab.Screen
-                        name="SettingsScreen"
+                        name="Settings"
                         component={SettingsScreen}
                         options={{headerShown: false}}
                     />
