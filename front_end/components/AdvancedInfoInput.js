@@ -3,7 +3,7 @@ import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react
 const AdvancedInfoScreen = ({navigation}) => {
     console.log("AdvancedInfoInput rendered");
 
-    const handlePress = () => {
+    const navigateToHomeScreen = () => {
         console.log('Button pressed (AdvancedInfoOutput -> HomeScreen)');
         navigation.navigate('HomeScreen');
     };
@@ -49,7 +49,7 @@ const AdvancedInfoScreen = ({navigation}) => {
             />
 
             <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
+            <TouchableOpacity style={styles.button} onPress={navigateToHomeScreen}>
                 <Text style={styles.buttonText}>Finish</Text>
             </TouchableOpacity>
         </SafeAreaView>

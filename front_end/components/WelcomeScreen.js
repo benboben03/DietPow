@@ -5,7 +5,7 @@ import {StyleSheet, Text, SafeAreaView, Image, TouchableOpacity} from 'react-nat
 const WelcomeScreen = ({navigation}) => {
     console.log("WelcomeScreen rendered");
 
-    const handlePress = () => {
+    const navigateToBasicInfoInput = () => {
         console.log('Button pressed (WelcomeScreen -> BasicInfoInput)');
         navigation.navigate('BasicInfoInput');
     };
@@ -18,7 +18,7 @@ const WelcomeScreen = ({navigation}) => {
             </Text>
             <Image source={require('../assets/DietPowEmblem.png')} style={styles.logo}/>
             <StatusBar style="auto"/>
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
+            <TouchableOpacity style={styles.button} onPress={navigateToBasicInfoInput}>
                 <Text style={styles.buttonText}>Get Started</Text>
             </TouchableOpacity>
         </SafeAreaView>

@@ -20,7 +20,7 @@ const BasicInputScreen = ({navigation}) => {
         setIsGenderVisible(bool)
     }
 
-    const handlePress = () => {
+    const navigateToAdvancedInfoInput = () => {
         console.log('Button pressed (BasicInfoInput -> AdvancedInfoInput)');
         navigation.navigate('AdvancedInfoInput');
     };
@@ -100,7 +100,7 @@ const BasicInputScreen = ({navigation}) => {
             </Modal>
 
             <Text></Text>
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
+            <TouchableOpacity style={styles.button} onPress={navigateToAdvancedInfoInput}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
 
