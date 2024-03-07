@@ -1,11 +1,12 @@
 from dotenv import load_dotenv, find_dotenv
 import os
-from pymongo.mongo_client import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 load_dotenv(find_dotenv())
 
 password = os.environ.get("MONGODB_PWD")
 uri = f"mongodb+srv://benboben03:{password}@dietpow.duheyjf.mongodb.net/?retryWrites=true&w=majority&appName=DietPow"
-client = MongoClient(uri)
+# uri = "mongodb://localhost:27017/"
+client = AsyncIOMotorClient(uri)
 
 try:
     client.admin.command('ping')
