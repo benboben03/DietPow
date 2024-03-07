@@ -5,8 +5,7 @@ from enum import Enum
 
 # Track User Info
 class User(BaseModel):
-    # email: EmailStr
-    email: str
+    email: EmailStr
     name: str
     age: int
     weight: float
@@ -15,7 +14,7 @@ class User(BaseModel):
     goal: str
 
 class TrackedWeight(BaseModel):
-    t_date: date
+    t_date: datetime
     current_weight: float
 
 class UserGoalTrack(BaseModel):
@@ -37,7 +36,7 @@ class EachFood(BaseModel):
 
 class FoodTrack(BaseModel):
     email: EmailStr
-    eaten_food: Dict[date, List[EachFood]] = {}
+    eaten_food: Dict[datetime, List[EachFood]] = {}
 
 
 # Track activites
@@ -67,4 +66,4 @@ class EachActivity(BaseModel):
 
 class ActivityTrack(BaseModel):
     email: EmailStr
-    activities_done: Dict[date, List[EachActivity]] = {}
+    activities_done: Dict[datetime, List[EachActivity]] = {}

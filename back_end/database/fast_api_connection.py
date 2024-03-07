@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from user_operations import router as user_router
+from weight_track_operation import router as weight_track_router
 
 '''
 To check FastAPI pip install uvicorn, go to this directory (cd back_end/database)
@@ -21,6 +22,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router, prefix="/api")
+app.include_router(weight_track_router, prefix="/api")
 
 @app.get("/")
 def read_root():
