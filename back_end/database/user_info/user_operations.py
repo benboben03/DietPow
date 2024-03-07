@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Body
 from models import User
 from typing import List
-from user_database import fetch_one_user, create_user, fetch_all_users, update_user, remove_user
+from user_info.user_database import fetch_one_user, create_user, fetch_all_users, update_user, remove_user
 
 router = APIRouter()
 
@@ -25,6 +25,7 @@ async def add_user(user: User):
     except HTTPException as e:
         raise e
 
+# UPDATING USER INFO DOES NOT FUNCTION PROPERLY
 @router.put("/user/{email}", response_model=User)
 async def update_user_data(email: str, user_update: User):
     updated_user = await update_user(email, user_update.model_dump(exclude_unset=True))

@@ -23,23 +23,13 @@ async def fetch_all_users():
     return users
 
 
-# async def create_user(user):
-#     if await user_exists(user["email"]) is None:
-#         created_user = await collection.insert_one(user)
-#         if created_user:
-#             return User(**created_user)
-#         else:
-#             raise HTTPException(status_code=500, detail="User created but cannot be fetched")
-#     else:
-#         raise HTTPException(status_code=400, detail=f"Email/User already exists.")
 async def create_user(user: dict) -> User:
     if await user_exists(user["email"]) is None:
         result: InsertOneResult = await collection.insert_one(user)
         if result.acknowledged:
-            # Fetch the inserted user to return a User model.
             created_user = await fetch_one_user(user["email"])
             if created_user:
-                return User(**created_user)  # Make sure to return a User model
+                return User(**created_user)
             else:
                 raise HTTPException(status_code=500, detail="User created but cannot be fetched")
     else:

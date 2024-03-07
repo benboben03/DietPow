@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Body
 from models import TrackedWeight, UserGoalTrack
 from typing import List
 from datetime import datetime
-from weight_track_db import add_weight_track, fetch_all_users_weight, fetch_one_user_weight, fetch_user_weight_by_date
+from user_info.weight_track_db import add_weight_track, fetch_all_users_weight, fetch_one_user_weight, fetch_user_weight_by_date
 
 router = APIRouter()
 
