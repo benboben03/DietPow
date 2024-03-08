@@ -27,6 +27,7 @@ const SettingsScreen = () => {
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
+                            keyboardType={'numeric'}
                             placeholder="Enter new goal weight"
                             placeholderTextColor="#666"
                             onChangeText={handleGoalTextChange}
