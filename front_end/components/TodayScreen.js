@@ -25,6 +25,13 @@ const TodayScreen = () => {
         setDinnerCalories(calories);
     }
 
+    const [calsBurned, setCalsBurned] = useState(0.0)
+    const handleCaloriesBurnedTextChange = (burned) => {
+        console.log("User entered text for calories burned: ");
+        console.log(burned);
+        setCalsBurned(burned);
+    }
+
     const [newWeight, setNewWeight] = useState(0.0)
     const handleNewWeightTextChange = (weight) => {
         console.log("User entered text for new weight: ");
@@ -32,12 +39,21 @@ const TodayScreen = () => {
         setNewWeight(weight);
     }
 
+    const [activity, setActivity] = useState(0.0)
+    const handleActivityTextChange = (act) => {
+        console.log("User entered text for activity: ");
+        console.log(act);
+        setActivity(act);
+    }
+
     const handleSubmitButtonPress = () => {
         console.log("User updated today with: ");
         console.log(newWeight);
+        console.log(activity);
         console.log(breakfastCalories);
         console.log(lunchCalories);
         console.log(dinnerCalories);
+        console.log(calsBurned);
         // TODO link with back-end
     }
 
@@ -49,6 +65,8 @@ const TodayScreen = () => {
             <View style={styles.bottomSection}>
                 <View style={styles.blueBackdrop}>
                     <Text style={styles.settingsText}>Enter today's recordings:</Text>
+
+                    {/*Weight*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.normalText}>Weight:</Text>
                         <TextInput
@@ -60,7 +78,20 @@ const TodayScreen = () => {
                         />
                     </View>
 
-                    <Text style={styles.settingsText}>Calories consumed:</Text>
+                    {/*Activity*/}
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Activity:</Text>
+                        <TextInput
+                            style={styles.input}
+                            keyboardType={'numeric'}
+                            placeholder="Enter active time (in mins)"
+                            placeholderTextColor="#666"
+                            onChangeText={handleActivityTextChange}
+                        />
+                    </View>
+
+                    {/*Breakfast Calories*/}
+                    <Text style={styles.settingsText}>Calories:</Text>
                     <View style={styles.inputContainer}>
                         <Text style={styles.normalText}>Breakfast:</Text>
                         <TextInput
@@ -72,6 +103,7 @@ const TodayScreen = () => {
                         />
                     </View>
 
+                    {/*Lunch calories*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.normalText}>Lunch:</Text>
                         <TextInput
@@ -83,6 +115,7 @@ const TodayScreen = () => {
                         />
                     </View>
 
+                    {/*Dinner calories*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.normalText}>Dinner</Text>
                         <TextInput
@@ -94,17 +127,25 @@ const TodayScreen = () => {
                         />
                     </View>
 
+                    {/*Burned calories*/}
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Burned</Text>
+                        <TextInput
+                            style={styles.input}
+                            keyboardType={'numeric'}
+                            placeholder="Calories burned..."
+                            placeholderTextColor="#666"
+                            onChangeText={handleCaloriesBurnedTextChange}
+                        />
+                    </View>
+
+                    {/*Submit button*/}
                     <TouchableOpacity
                         onPress={handleSubmitButtonPress}
                         style={styles.touchableOpacity}
                     >
                         <Text style={styles.buttonText}>Submit today's recordings</Text>
                     </TouchableOpacity>
-
-
-                    <Text style={styles.quoteHeaderText}>Today's Quote</Text>
-                    {/*TODO pull quotes from database*/}
-                    <Text style={styles.quoteText}>"Take care of your body, it's the only place you have to live in."</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -165,8 +206,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'stretch',
-        marginBottom: 20,
-        marginTop: 10,
+        marginBottom: 10,
+        marginTop: 5,
         justifyContent: 'space-between'
     },
     touchableOpacity: {
