@@ -1,24 +1,53 @@
-from gpt_connection import client
+from gpt_connection import client as gpt_client
 from random import choice
+from mongodb_connection import client as mongodb_client
+import hashlib
+
+database = mongodb_client.NotificationQuotes
+collection = database.quote_day
 
 quotes = [
-    "Provide me with a quote of the day to improve my body and set a goal for myself. Ensure that it is written by a credible source and a real person and not unknown.",
-    "Provide me with a quote of the day to improve my health. Ensure that it is written by a credible source and a real person and not unknown."
+    "Provide me with a quote of the day to improve my body and set a goal for myself. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Provide me with a quote of the day to improve my health. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Share a quote that inspires daily exercise and commitment to fitness by a renowned athlete. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "What's a motivational saying about the importance of nutrition in overall health from a well-respected dietitian? Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Provide a quote on the mental benefits of regular physical activity from a sports psychologist Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Share wisdom on the power of persistence in fitness goals from a celebrated personal trainer. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "What is an encouraging phrase about overcoming challenges in health and fitness from an inspirational speaker? Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Provide a quote that emphasizes the joy and fulfillment found in healthy living from a happiness researcher. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "What's a motivational quote on the importance of balance in diet and exercise from a holistic health coach? Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less.",
+    "Share an inspirational saying on the transformational power of making healthy choices from a life coach. Ensure that it is written by a credible source and a real person and not unknown, in 20 words or less."
+
 ]
 
-used_quotes = set()
+def normalize_quote(quote):
+    """Normalize the quote for more effective comparison."""
+    return ' '.join(quote.lower().split())
+
+def quote_hash(quote):
+    """Generate a hash for the quote."""
+    normalized_quote = normalize_quote(quote)
+    return hashlib.md5(normalized_quote.encode('utf-8')).hexdigest()
 
 def quote_of_the_day():
-    global used_quotes
+    document_count = collection.count_documents({})
+    if document_count >= 100:
+        collection.delete_many({})
+    
     while True:
-        completion = client.chat.completions.create(
+        completion = gpt_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": choice(quotes)}]
         )
         response = completion.choices[0].message.content.strip()
-        if response not in used_quotes:
+        response_hash = quote_hash(response)
+        
+        # Prevent duplicate quotes
+        if collection.find_one({"hash": response_hash}) is None and collection.find_one({"quote": response}) is None:
+            collection.insert_one({"quote": response, "hash": response_hash})
             print(response)
-            used_quotes.add(response)
-            break  # Exit loop after finding a new quote
+            break
 
-quote_of_the_day()
+# if __name__ == "__main__":
+#     for i in range(1, 120):
+#         quote_of_the_day()
