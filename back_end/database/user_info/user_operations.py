@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException
 from models import User
 from typing import List
 from user_info.user_database import fetch_one_user, create_user, fetch_all_users, update_user, remove_user
@@ -37,5 +37,5 @@ async def update_user_data(email: str, user_update: User):
 async def delete_user(email: str):
     deleted = await remove_user(email)
     if deleted:
-        return {"detail": "User successfully deleted"}
+        return {"Success_Detail": "User successfully deleted"}
     raise HTTPException(status_code=404, detail="User not found")

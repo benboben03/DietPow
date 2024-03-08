@@ -10,6 +10,7 @@ class User(BaseModel):
     age: int
     weight: float
     height: float
+    gender: str
     activity_level: str
     goal: str
 
@@ -27,7 +28,7 @@ class MealTime(str, Enum):
     BREAKFAST = 'Breakfast'
     LUNCH = 'Lunch'
     DINNER = 'Dinner'
-    SNACKS = 'Snacks'
+    SNACKS = 'Snack'
 
 class EachFood(BaseModel):
     meal_time: MealTime
