@@ -4,13 +4,16 @@ import random
 # Assuming the existence of 'client' as part of an external library to communicate with an AI model.
 
 tip_prompts = {
+    #bullet point less than 15 words or less and add extra print line
+    #more prompts at least 5 
+    
     "on track": [
-        "Great job staying on track with your health goals! Here's a tip to keep you motivated.",
-        "You're doing well maintaining your health goals. Can I offer a tip to keep it up?"
+        "Great job staying on track with your health goals! Here's a tip to keep you motivated. in 3 bullet point format",
+        "You're doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format"
     ],
     "needs motivation": [
-        "It looks like you might need some extra motivation to reach your health goals. Here's a tip for you.",
-        "Staying motivated can be challenging. Here's a health tip to help you get back on track."
+        "It looks like you might need some extra motivation to reach your health goals. Here's a tip for you.in 3 bullet point format",
+        "Staying motivated can be challenging. Here's a health tip to help you get back on track.in 3 bullet point format"
     ]
 }
 
