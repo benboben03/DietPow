@@ -21,15 +21,15 @@ quotes = [
 ]
 
 def normalize_quote(quote):
-    """Normalize the quote for more effective comparison."""
     return ' '.join(quote.lower().split())
 
 def quote_hash(quote):
-    """Generate a hash for the quote."""
+    # Generate a hash
     normalized_quote = normalize_quote(quote)
     return hashlib.md5(normalized_quote.encode('utf-8')).hexdigest()
 
 def quote_of_the_day():
+    # Delete all quotes from database after 100 quotes are in collection
     document_count = collection.count_documents({})
     if document_count >= 100:
         collection.delete_many({})
