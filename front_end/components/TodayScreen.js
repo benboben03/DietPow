@@ -100,6 +100,11 @@ const TodayScreen = () => {
                     >
                         <Text style={styles.buttonText}>Submit today's recordings</Text>
                     </TouchableOpacity>
+
+
+                    <Text style={styles.quoteHeaderText}>Today's Quote</Text>
+                    {/*TODO pull quotes from database*/}
+                    <Text style={styles.quoteText}>"Take care of your body, it's the only place you have to live in."</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -174,6 +179,17 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#ffffff',
         fontSize: 15
+    },
+    quoteHeaderText: {
+        fontSize: 25,
+        color: 'white',
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+        marginTop: 30
+    },
+    quoteText: {
+        fontSize: 20,
+        color: 'white'
     }
 })
 
