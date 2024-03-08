@@ -45,16 +45,29 @@ const BasicInputScreen = ({navigation}) => {
         // TODO link with back-end
     }
 
+    const handleEmailTextChange = (text) => {
+        console.log("User entered text for email: ");
+        console.log(text);
+        // TODO link with back-end
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Image source={require('../assets/BasicInfoPhoto.png')} style={styles.logo}/>
-            <Text style={styles.infoText}>Before getting started, we'll{"\n"}need to know some basic information
-                first.</Text>
+            <Text style={styles.infoText}>Before getting started, we'll{"\n"}need to know some basic information first.</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Enter your name"
                 placeholderTextColor="#666"
                 onChangeText={handleNameTextChange}
+            />
+
+            <Text style={styles.infoText}>Your email is how we'll remember your information</Text>
+            <TextInput
+                style={styles.input}
+                keyboardType={'email-address'}
+                placeholder="Enter your email"
+                placeholderTextColor="#666"
+                onChangeText={handleEmailTextChange}
             />
 
             <Text style={styles.infoText}>Select your age (in years)</Text>

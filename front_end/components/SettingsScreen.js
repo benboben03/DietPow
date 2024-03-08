@@ -16,6 +16,12 @@ const SettingsScreen = () => {
         // TODO link with back-end
     }
 
+    const [notifToggle, setNotifToggle] = useState(true)
+    const handleNotifToggleButtonPress = () => {
+        setNotifToggle(!notifToggle)
+        console.log("Notifications are now " + notifToggle)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topSection}>
@@ -27,6 +33,7 @@ const SettingsScreen = () => {
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
+                            keyboardType={'numeric'}
                             placeholder="Enter new goal weight"
                             placeholderTextColor="#666"
                             onChangeText={handleGoalTextChange}
@@ -38,6 +45,13 @@ const SettingsScreen = () => {
                             <Text style={styles.buttonText}>Update</Text>
                         </TouchableOpacity>
                     </View>
+
+                    <TouchableOpacity
+                        onPress={handleNotifToggleButtonPress}
+                        style={styles.touchableOpacityMarginTop}
+                    >
+                        <Text style={styles.buttonText}>Turn Notifications {notifToggle ? 'On' : 'Off'}</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
@@ -87,7 +101,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: '60%',
         padding: 10,
-        marginRight: 10,
+        marginRight: 20,
         fontSize: 15,
         color: '#333',
     },
@@ -101,6 +115,14 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
         paddingHorizontal: 30,
         alignItems: 'center',
+    },
+    touchableOpacityMarginTop: {
+        borderRadius: 25,
+        backgroundColor: '#FF7300',
+        paddingVertical: 13,
+        paddingHorizontal: 30,
+        alignItems: 'center',
+        marginTop: 20
     },
     buttonText: {
         color: '#ffffff',

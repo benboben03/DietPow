@@ -27,12 +27,14 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
                 current{"\n"}biometrics </Text>
             <TextInput
                 style={styles.input}
+                keyboardType={'numeric'}
                 placeholder="Enter your height (in inches)"
                 placeholderTextColor="#666"
                 onChangeText={handleHeightTextChange}
             />
             <TextInput
                 style={styles.input}
+                keyboardType={'numeric'}
                 placeholder="Enter your weight (in lbs)"
                 placeholderTextColor="#666"
                 onChangeText={handleWeightTextChange}
@@ -41,6 +43,7 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
             <Text style={styles.infoText}> {"\n\n"}What is your weight goal? </Text>
             <TextInput
                 style={styles.input}
+                keyboardType={'numeric'}
                 placeholder="Enter your goal (in lbs)"
                 placeholderTextColor="#666"
                 onChangeText={handleGoalTextChange}
