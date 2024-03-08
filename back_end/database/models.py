@@ -28,7 +28,7 @@ class MealTime(str, Enum):
     BREAKFAST = 'Breakfast'
     LUNCH = 'Lunch'
     DINNER = 'Dinner'
-    SNACKS = 'Snack'
+    SNACKS = 'Snacks'
 
 class EachFood(BaseModel):
     meal_time: MealTime
