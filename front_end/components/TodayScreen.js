@@ -175,13 +175,14 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 40,
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     settingsText: {
         fontSize: 25,
         color: 'white',
         marginBottom: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textDecorationLine: 'underline'
     },
     normalText: {
         fontSize: 25,
