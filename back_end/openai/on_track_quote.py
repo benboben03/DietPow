@@ -1,12 +1,13 @@
 from gpt_connection import client
 import random
+from tdee import calculate_tdee
 
 # Assuming the existence of 'client' as part of an external library to communicate with an AI model.
 
 tip_prompts = {
     #bullet point less than 15 words or less and add extra print line
     #more prompts at least 5 
-    
+
     "on track": [
         "Great job staying on track with your health goals! Here's a tip to keep you motivated. in 3 bullet point format",
         "You're doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format"
@@ -17,26 +18,6 @@ tip_prompts = {
     ]
 }
 
-def calculate_tdee(weight, height, age, gender, activity_level):
-    # Calculate BMR based on gender
-    if gender.lower() == 'male':
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5
-    else:
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161
-    
-    # Adjust BMR based on activity level
-    if activity_level == 'sedentary':
-        tdee = bmr * 1.2
-    elif activity_level == 'lightly active':
-        tdee = bmr * 1.375
-    elif activity_level == 'moderately active':
-        tdee = bmr * 1.55
-    elif activity_level == 'very active':
-        tdee = bmr * 1.725
-    else:  # extra active
-        tdee = bmr * 1.9
-
-    return round(tdee, 2)
 
 used_tips = set()
 
