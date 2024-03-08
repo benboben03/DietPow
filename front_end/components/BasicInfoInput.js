@@ -64,6 +64,7 @@ const BasicInputScreen = ({navigation}) => {
             <Text style={styles.infoText}>Your email is how we'll remember your information</Text>
             <TextInput
                 style={styles.input}
+                keyboardType={'email-address'}
                 placeholder="Enter your email"
                 placeholderTextColor="#666"
                 onChangeText={handleEmailTextChange}
