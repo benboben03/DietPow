@@ -34,29 +34,66 @@ const TodayScreen = () => {
 
     const handleSubmitButtonPress = () => {
         console.log("User updated today with: ");
+        console.log(newWeight);
         console.log(breakfastCalories);
         console.log(lunchCalories);
         console.log(dinnerCalories);
-        console.log(newWeight);
         // TODO link with back-end
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topSection}>
-                <Text style={styles.titleText}>Settings</Text>
+                <Text style={styles.titleText}>Today's Progress</Text>
             </View>
             <View style={styles.bottomSection}>
                 <View style={styles.blueBackdrop}>
                     <Text style={styles.settingsText}>Enter today's recordings:</Text>
                     <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Weight:</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Enter new goal weight"
+                            keyboardType={'numeric'}
+                            placeholder="Enter current weight"
+                            placeholderTextColor="#666"
+                            onChangeText={handleNewWeightTextChange}
+                        />
+                    </View>
+
+                    <Text style={styles.settingsText}>Calories consumed:</Text>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Breakfast:</Text>
+                        <TextInput
+                            style={styles.input}
+                            keyboardType={'numeric'}
+                            placeholder="Breakfast calories..."
                             placeholderTextColor="#666"
                             onChangeText={handleBreakfastCaloriesTextChange}
                         />
                     </View>
+
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Lunch:</Text>
+                        <TextInput
+                            style={styles.input}
+                            keyboardType={'numeric'}
+                            placeholder="Lunch calories..."
+                            placeholderTextColor="#666"
+                            onChangeText={handleLunchCaloriesTextChange}
+                        />
+                    </View>
+
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.normalText}>Dinner</Text>
+                        <TextInput
+                            style={styles.input}
+                            keyboardType={'numeric'}
+                            placeholder="Dinner calories..."
+                            placeholderTextColor="#666"
+                            onChangeText={handleDinnerCaloriesTextChange}
+                        />
+                    </View>
+
                     <TouchableOpacity
                         onPress={handleSubmitButtonPress}
                         style={styles.touchableOpacity}
@@ -100,6 +137,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontWeight: 'bold'
     },
+    normalText: {
+        fontSize: 25,
+        color: 'white',
+        marginBottom: 10,
+    },
     blueBackdrop: {
         backgroundColor: '#0A9BCB',
         flex: 1,
@@ -112,13 +154,15 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: '60%',
         padding: 10,
-        marginRight: 10,
         fontSize: 15,
         color: '#333',
     },
     inputContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'stretch',
+        marginBottom: 20,
+        marginTop: 10,
+        justifyContent: 'space-between'
     },
     touchableOpacity: {
         borderRadius: 25,
