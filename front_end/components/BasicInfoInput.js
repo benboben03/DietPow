@@ -11,6 +11,8 @@ const BasicInputScreen = ({navigation}) => {
     const [chooseGender, setChooseGender] = useState('Select Gender')
     const [isAgeVisible, setIsAgeVisible] = useState(false)
     const [isGenderVisible, setIsGenderVisible] = useState(false)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
 
     const changeAgeVisibility = (bool) => {
         setIsAgeVisible(bool)
@@ -22,6 +24,11 @@ const BasicInputScreen = ({navigation}) => {
 
     const navigateToAdvancedInfoInput = () => {
         console.log('Button pressed (BasicInfoInput -> AdvancedInfoInput)');
+        // TODO link with back-end
+        console.log(name);
+        console.log(email);
+        console.log(chooseAge);
+        console.log(chooseGender);
         navigation.navigate('AdvancedInfoInput');
     };
 
@@ -29,26 +36,24 @@ const BasicInputScreen = ({navigation}) => {
         console.log("User chose age: ");
         console.log(option);
         setChooseAge(option);
-        // TODO link with back-end
     }
 
     const setGender = (option) => {
         console.log("User chose gender: ");
         console.log(option);
         setChooseGender(option);
-        // TODO link with back-end
     }
 
     const handleNameTextChange = (text) => {
         console.log("User entered text for name: ");
         console.log(text);
-        // TODO link with back-end
+        setName(text);
     }
 
     const handleEmailTextChange = (text) => {
         console.log("User entered text for email: ");
         console.log(text);
-        // TODO link with back-end
+        setEmail(text);
     }
 
     return (
