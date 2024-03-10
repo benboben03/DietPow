@@ -12,6 +12,8 @@ tip_prompts = {
     #comvert prompts to f strings such that I can use data reported in the database for that particular user to get more 
     #personalized tips from the AI model
 
+    #f"great job. as a {gender} with {activity_level} activity level, you are doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format 15 words or less",
+
     "on track": [
         "Great job staying on track with your health goals! Here's a tip to keep you motivated. in 3 bullet point format 15 words or less",
         "You're doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format 15 words or less",
