@@ -17,7 +17,6 @@ client = OpenAI(api_key=API_KEY)
 
 #main gpt connnection file
 # have to have one module where its the quote of the day with the author name
-# have to have motivation and reminders to work out and eat healthy
 # have to have a module for tips if you are on track or falling behind personalized on your goals
 
 

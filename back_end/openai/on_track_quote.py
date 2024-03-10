@@ -8,13 +8,23 @@ tip_prompts = {
     #bullet point less than 15 words or less and add extra print line
     #more prompts at least 5 
 
+
+    #comvert prompts to f strings such that I can use data reported in the database for that particular user to get more 
+    #personalized tips from the AI model
+
     "on track": [
-        "Great job staying on track with your health goals! Here's a tip to keep you motivated. in 3 bullet point format",
-        "You're doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format"
+        "Great job staying on track with your health goals! Here's a tip to keep you motivated. in 3 bullet point format 15 words or less",
+        "You're doing well maintaining your health goals. Can I offer a tip to keep it up? in 3 bullet point format 15 words or less",
+        "you seem to getting on track with your daily goal plan. here is additional 3 bullet point tips for you to ensure you continue your streak ensure it is 15 words of less 3 bullet points",
+        "You're progressing well. Here are 3 tips to maintain your streak: focus, consistency, and adaptability. in 3 bullet point format 15 words or less",
+        "You're doing great! Here are 3 tips to keep you on track: in 3 bullet point format 15 words or less"
     ],
     "needs motivation": [
-        "It looks like you might need some extra motivation to reach your health goals. Here's a tip for you.in 3 bullet point format",
-        "Staying motivated can be challenging. Here's a health tip to help you get back on track.in 3 bullet point format"
+        "It looks like you might need some extra motivation to reach your health goals. Here's a tip for you.in 3 bullet point format 15 words or less",
+        "Staying motivated can be challenging. Here's a health tip to help you get back on track.in 3 bullet point format 15 words or less",
+        "It's normal to need a little extra motivation. Perhpas you need a little boost for your health goals. Here's a tip to help you get back on track.in 3 bullet point format in 15 words or less",
+        "It is important to prioritize your health goals. Here are 3 tips to help you stay motivated: in 3 bullet point format 15 words or less",
+        "It is mandatory to strive forward to enhance your health goals. Here are 3 tips to help you stay motivated: in 3 bullet point format 15 words or less",
     ]
 }
 
@@ -88,7 +98,8 @@ age = 25  # years
 gender = 'male'
 #activity level from profile
 activity_level = 'moderately active'
-tip = get_health_tip(current_intake, weight, height, age, gender, activity_level)
+tip = get_health_tip(current_intake, weight, height, age, gender, activity_level).strip()
 
-print("Today's health tip:", tip)
+formatted_tip = ("Today's health tip:\n" + tip).lstrip()
+print(formatted_tip)
 print("Estimated days to reach goal:", day_count)
