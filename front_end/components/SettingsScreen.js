@@ -1,4 +1,4 @@
-import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import React, {useState} from "react";
 
 const SettingsScreen = () => {
@@ -23,38 +23,40 @@ const SettingsScreen = () => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.topSection}>
-                <Text style={styles.titleText}>Settings</Text>
-            </View>
-            <View style={styles.bottomSection}>
-                <View style={styles.blueBackdrop}>
-                    <Text style={styles.settingsText}>Change your goal weight</Text>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            style={styles.input}
-                            keyboardType={'numeric'}
-                            placeholder="Enter new goal weight"
-                            placeholderTextColor="#666"
-                            onChangeText={handleGoalTextChange}
-                        />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.topSection}>
+                    <Text style={styles.titleText}>Settings</Text>
+                </View>
+                <View style={styles.bottomSection}>
+                    <View style={styles.blueBackdrop}>
+                        <Text style={styles.settingsText}>Change your goal weight</Text>
+                        <View style={styles.inputContainer}>
+                            <TextInput
+                                style={styles.input}
+                                keyboardType={'numeric'}
+                                placeholder="Enter new goal weight"
+                                placeholderTextColor="#666"
+                                onChangeText={handleGoalTextChange}
+                            />
+                            <TouchableOpacity
+                                onPress={handleGoalButtonPress}
+                                style={styles.touchableOpacity}
+                            >
+                                <Text style={styles.buttonText}>Update</Text>
+                            </TouchableOpacity>
+                        </View>
+
                         <TouchableOpacity
-                            onPress={handleGoalButtonPress}
-                            style={styles.touchableOpacity}
+                            onPress={handleNotifToggleButtonPress}
+                            style={styles.touchableOpacityMarginTop}
                         >
-                            <Text style={styles.buttonText}>Update</Text>
+                            <Text style={styles.buttonText}>Turn Notifications {notifToggle ? 'On' : 'Off'}</Text>
                         </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity
-                        onPress={handleNotifToggleButtonPress}
-                        style={styles.touchableOpacityMarginTop}
-                    >
-                        <Text style={styles.buttonText}>Turn Notifications {notifToggle ? 'On' : 'Off'}</Text>
-                    </TouchableOpacity>
                 </View>
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 
