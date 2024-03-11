@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal} from 'react-native';
+import {StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {AgePicker} from './pickers/AgePicker';
 import {GenderPicker} from './pickers/GenderPicker';
 
@@ -57,79 +57,81 @@ const BasicInputScreen = ({navigation}) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.infoText}>Before getting started, we'll{"\n"}need to know some basic information first.</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your name"
-                placeholderTextColor="#666"
-                onChangeText={handleNameTextChange}
-            />
-
-            <Text style={styles.infoText}>Your email is how we'll remember your information</Text>
-            <TextInput
-                style={styles.input}
-                keyboardType={'email-address'}
-                placeholder="Enter your email"
-                placeholderTextColor="#666"
-                onChangeText={handleEmailTextChange}
-            />
-
-            <Text style={styles.infoText}>Select your age (in years)</Text>
-            <TouchableOpacity
-                onPress={() => changeAgeVisibility(true)}
-                style={styles.touchableOpacity}
-            >
-                <Text style={styles.optionText}>{chooseAge}</Text>
-
-            </TouchableOpacity>
-
-            {/*Controls the pop-up picker for age*/}
-            <Modal
-                transparent={true}
-                animationType='fade'
-                visible={isAgeVisible}
-                nRequestClose={() => changeAgeVisibility(false)}
-            >
-                <AgePicker
-                    changeModalVisibility={changeAgeVisibility}
-                    setData={setAge}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.infoText}>Before getting started, we'll{"\n"}need to know some basic information first.</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter your name"
+                    placeholderTextColor="#666"
+                    onChangeText={handleNameTextChange}
                 />
 
-            </Modal>
-
-            <Text style={styles.infoText}>Select your sex</Text>
-            <TouchableOpacity
-                onPress={() => changeGenderVisibility(true)}
-                style={styles.touchableOpacity}
-            >
-                <Text style={styles.optionText}>{chooseGender}</Text>
-
-            </TouchableOpacity>
-
-            {/*Controls the pop-up picker for gender*/}
-            <Modal
-                transparent={true}
-                animationType='fade'
-                visible={isGenderVisible}
-                nRequestClose={() => changeGenderVisibility(false)}
-            >
-
-                <GenderPicker
-                    changeModalVisibility={changeGenderVisibility}
-                    setData={setGender}
+                <Text style={styles.infoText}>Your email is how we'll remember your information</Text>
+                <TextInput
+                    style={styles.input}
+                    keyboardType={'email-address'}
+                    placeholder="Enter your email"
+                    placeholderTextColor="#666"
+                    onChangeText={handleEmailTextChange}
                 />
 
-            </Modal>
+                <Text style={styles.infoText}>Select your age (in years)</Text>
+                <TouchableOpacity
+                    onPress={() => changeAgeVisibility(true)}
+                    style={styles.touchableOpacity}
+                >
+                    <Text style={styles.optionText}>{chooseAge}</Text>
 
-            {/*Button to navigate to the next page*/}
-            <Text></Text>
-            <TouchableOpacity style={styles.button} onPress={navigateToAdvancedInfoInput}>
-                <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
 
-            <StatusBar style="auto"/>
-        </SafeAreaView>
+                {/*Controls the pop-up picker for age*/}
+                <Modal
+                    transparent={true}
+                    animationType='fade'
+                    visible={isAgeVisible}
+                    nRequestClose={() => changeAgeVisibility(false)}
+                >
+                    <AgePicker
+                        changeModalVisibility={changeAgeVisibility}
+                        setData={setAge}
+                    />
+
+                </Modal>
+
+                <Text style={styles.infoText}>Select your sex</Text>
+                <TouchableOpacity
+                    onPress={() => changeGenderVisibility(true)}
+                    style={styles.touchableOpacity}
+                >
+                    <Text style={styles.optionText}>{chooseGender}</Text>
+
+                </TouchableOpacity>
+
+                {/*Controls the pop-up picker for gender*/}
+                <Modal
+                    transparent={true}
+                    animationType='fade'
+                    visible={isGenderVisible}
+                    nRequestClose={() => changeGenderVisibility(false)}
+                >
+
+                    <GenderPicker
+                        changeModalVisibility={changeGenderVisibility}
+                        setData={setGender}
+                    />
+
+                </Modal>
+
+                {/*Button to navigate to the next page*/}
+                <Text></Text>
+                <TouchableOpacity style={styles.button} onPress={navigateToAdvancedInfoInput}>
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
+
+                <StatusBar style="auto"/>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 
