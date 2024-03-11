@@ -1,4 +1,5 @@
 import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react-native';
+import api from './api';
 
 const AdvancedInfoScreen = ({onIntroComplete}) => {
     console.log("AdvancedInfoInput rendered");
