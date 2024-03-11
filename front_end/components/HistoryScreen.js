@@ -1,10 +1,7 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
-import {getToday, getFormattedDate} from 'react-native-modern-datepicker';
 import React, {useState} from 'react';
 import {statusBar} from 'expo-status-bar';
-import {Modal, StyleSheet, View, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Modal, StyleSheet, View, Text, TextInput, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import { format } from 'date-fns';
 
 
 const HistoryScreen = () => {
@@ -14,23 +11,19 @@ const HistoryScreen = () => {
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [open, setOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState('03/9/2024');
-    
-    // const today = new Date();
-    // const startDate = getFormattedDate(today.setDate(today.getDate() + 1), 'DD/MM/YYYY');
-    
-    const today = new Date();
-    const startDate = format(new Date(today.setDate(today.getDate() + 1)), 'dd/MM/yyyy');
+
+    const handleDateChange = (selectedDate) => {
+        console.log("User entered text for date change: ");
+        console.log(selectedDate);
+        setSelectedDate(selectedDate);
+    }
 
     const handleDateButtonPress = () => {
-        console.log("User selected a date: ");
+        console.log("User inputted new date");
         setOpen(!open);
         console.log(selectedDate);
         setIsPickerShow(!isPickerShow);
     };
-
-    function handleChange (newDate) {
-        setSelectedDate(format(newDate, 'MM/dd/yyyy'));
-    }
 
     {/* Constant variables used for biometrics */}
     const [weight, setWeight] = useState(170); // in pounds
@@ -53,30 +46,30 @@ const HistoryScreen = () => {
     };
 
     const data = {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
             {
-                data: [190, 183, 175, 177, 178, 172],
-                strokeWidth: 2, // optional
+                data: [190, 183, 175, 177, 178, 172, 172],
+                strokeWidth: 2,
             },
         ],
     };
 
     const data2 = {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
             {
-                data: [35, 53, 81, 66, 58, 74],
+                data: [35, 53, 81, 66, 58, 74, 76],
                 strokeWidth: 2,
             },
         ],
     };
 
     const data3 = {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
             {
-                data: [984, 1241, 1412, 544, 788, 1302],
+                data: [984, 1241, 1412, 544, 788, 1302, 1131],
                 strokeWidth: 2,
             },
         ],
@@ -94,39 +87,20 @@ const HistoryScreen = () => {
                             <Text style={styles.label}>Date: </Text>
                             {selectedDate}
                         </Text>
+                        <Text style={styles.normalText}></Text>
+                            <TextInput
+                                style={styles.input}
+                                keyboardType={'keyboard'}
+                                placeholder="Input date"
+                                placeholderTextColor="#666"
+                                onChangeText={handleDateChange}
+                            />
                         <TouchableOpacity
                             onPress={handleDateButtonPress}
                             style={styles.touchableOpacity}
                         >
                             <Text style={styles.buttonText}>Change Date</Text>
                         </TouchableOpacity>
-                        <Modal
-                        animationType='slide'
-                        transparent={true}
-                        visible={open}
-                        >
-                            <View style={styles.centeredView}>
-                                <View style={styles.modalView}>
-                                    <DateTimePicker
-                                    value={new Date(selectedDate)}
-                                    mode="date"
-                                    display="default"
-                                    onChange={(event, selectedDate) => {
-                                        const currentDate = selectedDate || new Date();
-                                        setOpen(false);
-                                        setSelectedDate(currentDate);
-                                    }}
-                                    maximumDate={new Date}
-                                    />
-                                <TouchableOpacity
-                            onPress={handleDateButtonPress}
-                            style={styles.touchableOpacity}
-                        >
-                            <Text style={styles.buttonText}>Change Date</Text>
-                        </TouchableOpacity>
-                                </View>
-                            </View>
-                        </Modal>
 
                     </View>
                     
@@ -206,21 +180,12 @@ const styles = StyleSheet.create({
         marginTop: 22,
     },
 
-    modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        width: '90%',
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        marginBottom: 10,
+        marginTop: 5,
+        justifyContent: 'space-between'
     },
 
     topSection: {
