@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {statusBar} from 'expo-status-bar';
 import {StyleSheet, View, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -8,10 +9,12 @@ const HistoryScreen = () => {
     console.log("HistoryScreen rendered");
 
     const [isPickerShow, setIsPickerShow] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const [selectedDate, setSelectedDate] = useState('Feburary 4, 2024');
     const handleDateButtonPress = () => {
-        console.log("User selected new date: ");
+        console.log("User selected a date: ");
+        setOpen(!open);
         console.log(selectedDate);
         setIsPickerShow(!isPickerShow);
     };
@@ -82,6 +85,16 @@ const HistoryScreen = () => {
                         >
                             <Text style={styles.buttonText}>Change Date</Text>
                         </TouchableOpacity>
+                        <Modal
+                        animationType='slide'
+                        transparent={true}
+                        visible={open}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                </View>
+                            </View>
+                        </Modal>
 
                     </View>
 
@@ -148,6 +161,24 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // justifyContent: 'center',
     },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        width: '90%',
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset
+    }
 
     topSection: {
         backgroundColor: '#11BCF5',

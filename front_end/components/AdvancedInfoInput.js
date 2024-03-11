@@ -1,25 +1,36 @@
 import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react-native';
-import api from './api';
 
 const AdvancedInfoScreen = ({onIntroComplete}) => {
     console.log("AdvancedInfoInput rendered");
 
+    const [weight, setWeight] = useState(0.0);
+    const [height, setHeight] = useState(0.0);
+    const [goal, setGoal] = useState(0.0);
+
     const handleHeightTextChange = (text) => {
         console.log("User entered text for height: ");
         console.log(text);
-        // TODO link with back-end
+        setHeight(text);
     }
 
     const handleWeightTextChange = (text) => {
         console.log("User entered text for weight: ");
         console.log(text);
-        // TODO link with back-end
+        setWeight(text);
     }
 
     const handleGoalTextChange = (text) => {
         console.log("User entered text for goal: ");
         console.log(text);
-        // TODO link with back-end
+        setGoal(text);
+    }
+
+    const handleFinishButtonPress = () => {
+        console.log("Button pressed (AdvancedInfoInput -> HomeScreen)");
+        console.log(height);
+        console.log(weight);
+        console.log(goal);
+        onIntroComplete();
     }
 
     return (
@@ -51,7 +62,7 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
             />
 
             <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
-            <TouchableOpacity style={styles.button} onPress={onIntroComplete}>
+            <TouchableOpacity style={styles.button} onPress={handleFinishButtonPress}>
                 <Text style={styles.buttonText}>Finish</Text>
             </TouchableOpacity>
         </SafeAreaView>

@@ -4,15 +4,32 @@ from datetime import datetime, date
 from enum import Enum
 
 # Track User Info
+class ActivityLevels(str, Enum):
+    SEDENTARY = 'sedentary'
+    LIGHTLY_ACTIVE = 'lightly active'
+    MODERATELY_ACTIVE = 'moderately active'
+    VERY_ACTIVE = 'very active'
+    EXTRA_ACTIVE = 'extra active'
+
+class Genders(str, Enum):
+    MALE = "male"
+    FEMALE = "female"
+
+class Goals(str, Enum):
+    LOSE = "lose"
+    GAIN = "gain"
+    MAINTAIN = "maintain"
+
 class User(BaseModel):
     email: EmailStr
     name: str
     age: int
     weight: float
     height: float
-    gender: str
-    activity_level: str
-    goal: str
+    gender: Genders
+    activity_level: ActivityLevels
+    goal: Goals
+    target_weight: float
 
 class TrackedWeight(BaseModel):
     t_date: datetime
