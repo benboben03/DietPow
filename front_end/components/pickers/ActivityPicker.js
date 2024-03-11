@@ -1,7 +1,8 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View, ScrollView, Dimensions} from 'react-native';
 
-const OPTIONS = ['Male', 'Female', 'Non-specified']
+const OPTIONS = ['run', 'bike', 'walk', 'basketball', 'soccer', 'weight lift', 'tennis', 'swim', 
+                'football', 'baseball', 'hike', 'volleyball', 'golf', 'high intensity interval training', 'skating', 'dance']
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -31,7 +32,7 @@ const ActivityPicker = (props) => {
             onPress={() => props.changeModalVisibility(false)}
             style={styles.container}
         >
-            <View style={[styles.modal, {width: WIDTH - 200, height: HEIGHT / 4}]}>
+            <View style={[styles.modal, {width: WIDTH - 200, height: HEIGHT / 2}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>
