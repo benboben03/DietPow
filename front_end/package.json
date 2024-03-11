@@ -9,26 +9,19 @@
     "web": "expo start --web"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@react-native-community/datetimepicker": "7.6.1",
-=======
     "@react-native-community/datetimepicker": "^7.6.2",
->>>>>>> b53e0237201ea634495cbc61b13452b2dc8aca7a
     "@react-native-picker/picker": "^2.6.1",
     "@react-navigation/bottom-tabs": "^6.5.16",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/stack": "^6.3.21",
     "@types/react": "~18.2.45",
-<<<<<<< HEAD
-    "date-fns": "^3.3.1",
-    "expo": "~50.0.5",
-=======
     "axios": "^1.6.7",
-    "expo": "^50.0.11",
->>>>>>> b53e0237201ea634495cbc61b13452b2dc8aca7a
+    "date-fns": "^3.3.1",
+    "expo": "^49.0.23",
     "expo-status-bar": "~1.11.1",
     "link": "^2.1.0",
     "react": "18.2.0",
+    "react-datepicker": "^6.2.0",
     "react-native": "^0.73.4",
     "react-native-chart-kit": "^6.12.0",
     "react-native-charts-wrapper": "^0.6.0",
