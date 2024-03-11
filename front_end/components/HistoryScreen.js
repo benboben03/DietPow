@@ -1,17 +1,26 @@
+import DateTimePicker from '@react-native-community/datetimepicker';
+import {getToday, getFormattedDate} from 'react-native-modern-datepicker';
 import React, {useState} from 'react';
 import {statusBar} from 'expo-status-bar';
-import {StyleSheet, View, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Modal, StyleSheet, View, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { format } from 'date-fns';
 
 
 const HistoryScreen = () => {
     console.log("HistoryScreen rendered");
 
+    {/* Instance and constant variables related to the date field */}
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [open, setOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState('03/9/2024');
+    
+    // const today = new Date();
+    // const startDate = getFormattedDate(today.setDate(today.getDate() + 1), 'DD/MM/YYYY');
+    
+    const today = new Date();
+    const startDate = format(new Date(today.setDate(today.getDate() + 1)), 'dd/MM/yyyy');
 
-    const [selectedDate, setSelectedDate] = useState('Feburary 4, 2024');
     const handleDateButtonPress = () => {
         console.log("User selected a date: ");
         setOpen(!open);
@@ -19,11 +28,17 @@ const HistoryScreen = () => {
         setIsPickerShow(!isPickerShow);
     };
 
+    function handleChange (newDate) {
+        setSelectedDate(format(newDate, 'MM/dd/yyyy'));
+    }
+
+    {/* Constant variables used for biometrics */}
     const [weight, setWeight] = useState(170); // in pounds
     const [activeTime, setActiveTime] = useState(30); // in minutes
     const [caloriesConsumed, setCaloriesConsumed] = useState(2000);
     const [caloriesBurned, setCaloriesBurned] = useState(1000);
 
+    {/* Constant variables for the data and charts */}
     const chartHeight = 110;
 
     const chartConfig = {
@@ -52,7 +67,7 @@ const HistoryScreen = () => {
         datasets: [
             {
                 data: [35, 53, 81, 66, 58, 74],
-                strokeWidth: 2, // optional
+                strokeWidth: 2,
             },
         ],
     };
@@ -62,7 +77,7 @@ const HistoryScreen = () => {
         datasets: [
             {
                 data: [984, 1241, 1412, 544, 788, 1302],
-                strokeWidth: 2, // optional
+                strokeWidth: 2,
             },
         ],
     };
@@ -92,12 +107,30 @@ const HistoryScreen = () => {
                         >
                             <View style={styles.centeredView}>
                                 <View style={styles.modalView}>
+                                    <DateTimePicker
+                                    value={new Date(selectedDate)}
+                                    mode="date"
+                                    display="default"
+                                    onChange={(event, selectedDate) => {
+                                        const currentDate = selectedDate || new Date();
+                                        setOpen(false);
+                                        setSelectedDate(currentDate);
+                                    }}
+                                    maximumDate={new Date}
+                                    />
+                                <TouchableOpacity
+                            onPress={handleDateButtonPress}
+                            style={styles.touchableOpacity}
+                        >
+                            <Text style={styles.buttonText}>Change Date</Text>
+                        </TouchableOpacity>
                                 </View>
                             </View>
                         </Modal>
 
                     </View>
-
+                    
+                    {/*Displays the weight & active time of the user at the top of the page*/}
                     <View style={{flexDirection: 'row', justifyContent: 'start', width: '96%', marginBottom: 5}}>
                         <Text style={[styles.smallerSubText, {flex: 1}]}>
                             <Text style={styles.label}>Weight: </Text>
@@ -109,7 +142,8 @@ const HistoryScreen = () => {
                             {activeTime} min
                         </Text>
                     </View>
-
+                    
+                    {/*Displays the calories burned/consumed of the user*/}
                     <View style={{flexDirection: 'row', justifyContent: 'start', width: '96%', marginBotttom: 10}}>
                         <Text style={[styles.smallerSubText, {flex: 1}]}>
                             <Text style={styles.label}>Calories Consumed: </Text>
@@ -121,7 +155,8 @@ const HistoryScreen = () => {
                             {caloriesBurned} kcal
                         </Text>
                     </View>
-
+                    
+                    {/*Displays the weight of the user for the previous months*/}
                     <Text style={styles.subText}>Weight (in lbs)</Text>
                     <LineChart
                         data={data}
@@ -131,6 +166,7 @@ const HistoryScreen = () => {
                         style={styles.chartStyle}
                     />
 
+                    {/*Displays the active time graph for the previous months*/}
                     <Text style={[styles.subText, {marginTop: 20}]}>Active Time (in minutes)</Text>
                     <LineChart
                         data={data2}
@@ -140,6 +176,7 @@ const HistoryScreen = () => {
                         style={styles.chartStyle}
                     />
 
+                    {/*Displays the net calories of the user for the previous months*/}
                     <Text style={[styles.subText, {marginTop: 20}]}>Net Calories</Text>
                     <LineChart
                         data={data3}
@@ -177,8 +214,14 @@ const styles = StyleSheet.create({
         padding: 35,
         alignItems: 'center',
         shadowColor: '#000',
-        shadowOffset
-    }
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
 
     topSection: {
         backgroundColor: '#11BCF5',
