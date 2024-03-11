@@ -1,4 +1,5 @@
-import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {useState} from "react";
 
 const AdvancedInfoScreen = ({onIntroComplete}) => {
     console.log("AdvancedInfoInput rendered");
@@ -34,38 +35,40 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.infoText}> Now that we have the basics,{"\n"}please input your
-                current{"\n"}biometrics </Text>
-            <TextInput
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholder="Enter your height (in inches)"
-                placeholderTextColor="#666"
-                onChangeText={handleHeightTextChange}
-            />
-            <TextInput
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholder="Enter your weight (in lbs)"
-                placeholderTextColor="#666"
-                onChangeText={handleWeightTextChange}
-            />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.infoText}> Now that we have the basics,{"\n"}please input your
+                    current{"\n"}biometrics </Text>
+                <TextInput
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholder="Enter your height (in inches)"
+                    placeholderTextColor="#666"
+                    onChangeText={handleHeightTextChange}
+                />
+                <TextInput
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholder="Enter your weight (in lbs)"
+                    placeholderTextColor="#666"
+                    onChangeText={handleWeightTextChange}
+                />
 
-            <Text style={styles.infoText}> {"\n\n"}What is your weight goal? </Text>
-            <TextInput
-                style={styles.input}
-                keyboardType={'numeric'}
-                placeholder="Enter your goal (in lbs)"
-                placeholderTextColor="#666"
-                onChangeText={handleGoalTextChange}
-            />
+                <Text style={styles.infoText}> {"\n\n"}What is your weight goal? </Text>
+                <TextInput
+                    style={styles.input}
+                    keyboardType={'numeric'}
+                    placeholder="Enter your goal (in lbs)"
+                    placeholderTextColor="#666"
+                    onChangeText={handleGoalTextChange}
+                />
 
-            <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
-            <TouchableOpacity style={styles.button} onPress={handleFinishButtonPress}>
-                <Text style={styles.buttonText}>Finish</Text>
-            </TouchableOpacity>
-        </SafeAreaView>
+                <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
+                <TouchableOpacity style={styles.button} onPress={handleFinishButtonPress}>
+                    <Text style={styles.buttonText}>Finish</Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 
