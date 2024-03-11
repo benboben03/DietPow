@@ -3,6 +3,7 @@ import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {AgePicker} from './pickers/AgePicker';
 import {GenderPicker} from './pickers/GenderPicker';
+import api from './api';
 
 const BasicInputScreen = ({navigation}) => {
     console.log("BasicInfoInput rendered");

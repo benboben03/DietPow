@@ -37,3 +37,5 @@ yarn-error.*
 /.idea/front_end.iml
 /.idea/modules.xml
 /.idea/vcs.xml
+
+yarn.lock
