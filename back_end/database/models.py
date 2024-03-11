@@ -49,7 +49,7 @@ class MealTime(str, Enum):
 
 class EachFood(BaseModel):
     meal_time: MealTime
-    description: str
+    # description: str
     calorie_count: int
 
 class FoodTrack(BaseModel):

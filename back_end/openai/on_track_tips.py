@@ -3,11 +3,17 @@ import random
 from tdee import calculate_tdee
 
 from on_track_tips_db import get_user_info
+from on_track_tips_db import get_current_weight
+from on_track_tips_db import get_meals
 
 
 email = "vishwatest@gmail.com"
 
 name, gender, activity_level, height, weight, target_weight, age= get_user_info(email)
+current_weight = get_current_weight(email)
+current_intake = get_meals(email)
+print(current_intake)
+print(current_weight)
 print(get_user_info(email))
 
 # Assuming the existence of 'client' as part of an external library to communicate with an AI model.
@@ -86,9 +92,9 @@ def estimate_days_to_goal(current_weight, target_weight, current_intake, weight,
         return round(days_to_goal)
 
 # Example usage
-current_weight = 70  # kg, current weight
+# current_weight = 70  # kg, current weight
 # target_weight = 65  # kg, goal weight
-current_intake = 2500  # calories, current daily intake
+#current_intake = 2500  # calories, current daily intake
 # weight = 70  # kg, for TDEE calculation
 # height = 175  # cm, for TDEE calculation
 # age = 25  # years, for TDEE calculation
