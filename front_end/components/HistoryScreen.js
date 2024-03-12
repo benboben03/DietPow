@@ -11,17 +11,18 @@ const HistoryScreen = () => {
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [open, setOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState('03/9/2024');
+    const [dateInput, setDateInput] = useState('');
 
-    const handleDateChange = (selectedDate) => {
+    const handleDateChange = (input) => {
         console.log("User entered text for date change: ");
-        console.log(selectedDate);
-        setSelectedDate(selectedDate);
+        console.log(input);
+        setDateInput(input);
     }
 
     const handleDateButtonPress = () => {
         console.log("User inputted new date");
         setOpen(!open);
-        console.log(selectedDate);
+        setSelectedDate(dateInput);
         setIsPickerShow(!isPickerShow);
     };
 
@@ -93,6 +94,7 @@ const HistoryScreen = () => {
                                 keyboardType={'keyboard'}
                                 placeholder="Input date"
                                 placeholderTextColor="#666"
+                                value={dateInput}
                                 onChangeText={handleDateChange}
                             />
                         <TouchableOpacity
