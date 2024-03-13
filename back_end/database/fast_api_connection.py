@@ -13,7 +13,7 @@ add /docs to localhost link
 
 app = FastAPI()
 
-origins = ['http://127.0.0.1:8000', 'http://172.20.10.3:8081']
+origins = ['http://192.168.100.83:8081', 'http://127.0.0.1:8000' ]
 
 app.add_middleware(
     CORSMiddleware,

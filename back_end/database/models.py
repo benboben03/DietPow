@@ -12,8 +12,8 @@ class ActivityLevels(str, Enum):
     EXTRA_ACTIVE = 'extra active'
 
 class Genders(str, Enum):
-    MALE = "male"
-    FEMALE = "female"
+    MALE = "Male"
+    FEMALE = "Female"
 
 class Goals(str, Enum):
     LOSE = "lose"

@@ -55,36 +55,17 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
         };
         console.log(userInfo);
         try {
-            // const response = await axios.post('http://127.0.0.1:8000/api/user/', {
-            //     // 'name': name,
-            //     // 'email': email,
-            //     // 'age': age,
-            //     // 'gender': gender,
-            //     // 'weight': weight,
-            //     // 'height': height,
-            //     // 'target_weight': goal,
-            //     "email": "benboben100@gmail.com",
-            //     "name": "Ben Boben",
-            //     "age": 0,
-            //     "weight": 0,
-            //     "height": 0,
-            //     "gender": "male",
-            //     "activity_level": "sedentary",
-            //     "goal": "lose",
-            //     "target_weight": 0
-            // });
             const response = await axios.post('http://127.0.0.1:8000/api/user/', {
-                "email": "benboben108@gmail.com",
-                "name": "Ben Boben",
-                "age": 0,
-                "weight": 0,
-                "height": 0,
-                "gender": "male",
+                'name': name,
+                'email': email,
+                'age': age,
+                'gender': gender,
+                'weight': weight,
+                'height': height,
+                'target_weight': goal,
                 "activity_level": "sedentary",
                 "goal": "lose",
-                "target_weight": 0
-              });
-    
+            });
             if (response.status === 200) {
                 const data = response.data;
                 console.log('User created:', data);
