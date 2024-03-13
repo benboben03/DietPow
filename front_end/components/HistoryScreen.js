@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {statusBar} from 'expo-status-bar';
-import {Modal, StyleSheet, View, Text, TextInput, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Modal, StyleSheet, View, Text, TextInput, Dimensions, SafeAreaView, Keyboard, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 
 
@@ -13,23 +13,29 @@ const HistoryScreen = () => {
     const [selectedDate, setSelectedDate] = useState('03/9/2024');
     const [dateInput, setDateInput] = useState('');
 
+    {/* Only changes the date if the characters are valid (numbers and slashes) */}
     const handleDateChange = (input) => {
         console.log("User entered text for date change: ");
         console.log(input);
-        setDateInput(input);
+        if (/^[0-9/]*$/.test(input)) {
+            setDateInput(input);
+          }
+        // setDateInput(input);
     }
 
+    {/* Changes necessary variables when "Change Date" button is pressed */}
     const handleDateButtonPress = () => {
         console.log("User inputted new date");
         setOpen(!open);
         setSelectedDate(dateInput);
+        setDateInput('');
         setIsPickerShow(!isPickerShow);
     };
 
     {/* Constant variables used for biometrics */}
     const [weight, setWeight] = useState(170); // in pounds
     const [activeTime, setActiveTime] = useState(30); // in minutes
-    const [caloriesConsumed, setCaloriesConsumed] = useState(2000);
+    const [caloriesConsumed, setCaloriesConsumed] = useState(2000); // both variables in kcal
     const [caloriesBurned, setCaloriesBurned] = useState(1000);
 
     {/* Constant variables for the data and charts */}
@@ -39,13 +45,14 @@ const HistoryScreen = () => {
         backgroundColor: "#ff7300",
         backgroundGradientFrom: "#ff7300",
         backgroundGradientTo: "#ffa726",
-        decimalPlaces: 2, // optional, defaults to 2dp
+        decimalPlaces: 2,
         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
         style: {
             borderRadius: 16
         }
     };
 
+    {/* Weight datapoints for past few days */}
     const data = {
         labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
@@ -56,6 +63,7 @@ const HistoryScreen = () => {
         ],
     };
 
+    {/* Active time datapoints for past few days */}
     const data2 = {
         labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
@@ -66,6 +74,7 @@ const HistoryScreen = () => {
         ],
     };
 
+    {/* Net Calories datapoints for past few days */}
     const data3 = {
         labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
         datasets: [
@@ -77,32 +86,43 @@ const HistoryScreen = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <SafeAreaView style={styles.container}>
             <View style={styles.topSection}>
                 <Text style={styles.titleText}>History</Text>
             </View>
             <View style={styles.bottomSection}>
                 <View style={styles.blueBackdrop}>
-                    <View style={{flexDirection: 'row', justifyContent: 'start', width: '96%', marginBottom: 5}}>
-                        <Text style={[styles.smallerSubText, {flex: 1}]}>
-                            <Text style={styles.label}>Date: </Text>
-                            {selectedDate}
-                        </Text>
+
+                    {/* Components for changing the date to display data from that date */}
+                    <View style={styles.inputContainer}>
                         <Text style={styles.normalText}></Text>
+
+                            {/* Text style for date change box */}
                             <TextInput
                                 style={styles.input}
-                                keyboardType={'keyboard'}
-                                placeholder="Input date"
+                                keyboardType={'numbers-and-punctuation'}
+                                placeholder="Input date in MM/DD/YYYY"
                                 placeholderTextColor="#666"
                                 value={dateInput}
                                 onChangeText={handleDateChange}
                             />
+                        {/* Orange button to change date */}
                         <TouchableOpacity
                             onPress={handleDateButtonPress}
                             style={styles.touchableOpacity}
                         >
                             <Text style={styles.buttonText}>Change Date</Text>
                         </TouchableOpacity>
+                    </View>
+
+                    {/* Displays the Date */}
+                    <View style={{flexDirection: 'row', justifyContent: 'start', width: '96%', marginBottom: 5}}>
+                        <Text style={[styles.smallerSubText, {flex: 1}]}>
+                            <Text style={styles.label}>Date: </Text>
+                            {selectedDate}
+                        </Text>
+                        
 
                     </View>
                     
@@ -164,6 +184,7 @@ const HistoryScreen = () => {
                 </View>
             </View>
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 
@@ -180,6 +201,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
+    },
+    input: {
+        backgroundColor: '#FFF',
+        borderRadius: 20,
+        width: '60%',
+        padding: 10,
+        fontSize: 15,
+        color: '#333',
+        marginRight: 5,
     },
 
     inputContainer: {
@@ -264,7 +294,8 @@ const styles = StyleSheet.create({
 
     buttonText: {
         color: '#ffffff',
-        fontSize: 15
+        fontSize: 15,
+        paddingRight: 15
     }
 })
 
