@@ -1,9 +1,17 @@
 import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import api from './api';
+import axios from 'axios';
 
-const AdvancedInfoScreen = ({onIntroComplete}) => {
+const AdvancedInfoScreen = ({onIntroComplete, route}) => {
     console.log("AdvancedInfoInput rendered");
-
+    // Get the basic info from the previous screen
+    const { basicInfo } = route.params;
+    const name = basicInfo.name;
+    const email = basicInfo.email;
+    const age = basicInfo.age;
+    const gender = basicInfo.gender;
+    // The data for this screen
     const [weight, setWeight] = useState(0.0);
     const [height, setHeight] = useState(0.0);
     const [goal, setGoal] = useState(0.0);
@@ -26,13 +34,71 @@ const AdvancedInfoScreen = ({onIntroComplete}) => {
         setGoal(text);
     }
 
-    const handleFinishButtonPress = () => {
+    // const handleFinishButtonPress = () => {
+    //     console.log("Button pressed (AdvancedInfoInput -> HomeScreen)");
+    //     console.log(height);
+    //     console.log(weight);
+    //     console.log(goal);
+    //     onIntroComplete();
+    // }
+    const handleFinishButtonPress = async () => {
         console.log("Button pressed (AdvancedInfoInput -> HomeScreen)");
-        console.log(height);
-        console.log(weight);
-        console.log(goal);
-        onIntroComplete();
-    }
+        const userInfo = {
+            name,
+            email,
+            age: parseInt(age, 10), // Ensure age is an integer
+            gender,
+            weight: parseFloat(weight), // Ensure weight is a float
+            height: parseFloat(height), // Ensure height is a float
+            activity_level: '', // This should be handled accordingly
+            goal
+        };
+        console.log(userInfo);
+        try {
+            // const response = await axios.post('http://127.0.0.1:8000/api/user/', {
+            //     // 'name': name,
+            //     // 'email': email,
+            //     // 'age': age,
+            //     // 'gender': gender,
+            //     // 'weight': weight,
+            //     // 'height': height,
+            //     // 'target_weight': goal,
+            //     "email": "benboben100@gmail.com",
+            //     "name": "Ben Boben",
+            //     "age": 0,
+            //     "weight": 0,
+            //     "height": 0,
+            //     "gender": "male",
+            //     "activity_level": "sedentary",
+            //     "goal": "lose",
+            //     "target_weight": 0
+            // });
+            const response = await axios.post('http://127.0.0.1:8000/api/user/', {
+                "email": "benboben108@gmail.com",
+                "name": "Ben Boben",
+                "age": 0,
+                "weight": 0,
+                "height": 0,
+                "gender": "male",
+                "activity_level": "sedentary",
+                "goal": "lose",
+                "target_weight": 0
+              });
+    
+            if (response.status === 200) {
+                const data = response.data;
+                console.log('User created:', data);
+                onIntroComplete(); // Or navigate to the home screen
+            } else {
+                console.error('Failed to create user:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            console.error('Error making API call:', error.response ? error.response.data : error.message);
+
+        }
+    };
+
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

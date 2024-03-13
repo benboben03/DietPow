@@ -25,12 +25,18 @@ const BasicInputScreen = ({navigation}) => {
 
     const navigateToAdvancedInfoInput = () => {
         console.log('Button pressed (BasicInfoInput -> AdvancedInfoInput)');
-        // TODO link with back-end
         console.log(name);
         console.log(email);
         console.log(chooseAge);
         console.log(chooseGender);
-        navigation.navigate('AdvancedInfoInput');
+        navigation.navigate('AdvancedInfoInput', {
+            basicInfo: {
+            name: name,
+            email: email,
+            age: chooseAge,
+            gender: chooseGender
+            }
+        });
     };
 
     const setAge = (option) => {
