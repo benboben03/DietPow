@@ -1,5 +1,7 @@
-import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {StyleSheet, Modal, Text, TextInput, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {useState, useEffect} from "react";
+import { ActivityLevelPicker } from './pickers/ActivityLevelPicker';
+import {GoalPicker} from './pickers/GoalPicker';
 import api from './api';
 import axios from 'axios';
 
@@ -15,6 +17,33 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
     const [weight, setWeight] = useState(0.0);
     const [height, setHeight] = useState(0.0);
     const [goal, setGoal] = useState(0.0);
+
+    // Added information for Losing, Gaining, or Maintaining weight
+    const [chooseWeightGoal, setChooseWeightGoal] = useState('Select weight goal')
+    const [chooseActivityLevel, setChooseActivityLevel] = useState('Select activity level')
+    const [isWeightGoalVisible, setIsWeightGoalVisible] = useState(false)
+    const [isActivityLevelVisible, setIsActivityLevelVisible] = useState(false)
+    
+    const changeWeightGoalVisibility = (bool) => {
+        setIsWeightGoalVisible(bool)
+    }
+
+    const changeActivityLevelVisibility = (bool) => {
+        setIsActivityLevelVisible(bool)
+    }
+
+    const setWeightGoal = (option) => {
+        console.log("User chose weight goal: ");
+        console.log(option);
+        setChooseWeightGoal(option);
+    }
+
+    const setActivityLevel = (option) => {
+        console.log("User chose activity level: ");
+        console.log(option);
+        setChooseActivityLevel(option);
+    }
+    // end of added info
 
     const handleHeightTextChange = (text) => {
         console.log("User entered text for height: ");
@@ -110,6 +139,52 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
                     onChangeText={handleGoalTextChange}
                 />
 
+<               Text style={styles.infoText}>What is your weight goal?</Text>
+                    <TouchableOpacity
+                        onPress={() => changeWeightGoalVisibility(true)}
+                        style={styles.touchableOpacity}
+                    >
+                        <Text style={styles.optionText}>{chooseWeightGoal}</Text>
+
+                    </TouchableOpacity>
+
+                    {/*Controls the pop-up picker for weight goal*/}
+                    <Modal
+                        transparent={true}
+                        animationType='fade'
+                        visible={isWeightGoalVisible}
+                        nRequestClose={() => changeWeightGoalVisibility(false)}
+                    >
+                        <GoalPicker
+                            changeModalVisibility={changeWeightGoalVisibility}
+                            setData={setWeightGoal}
+                        />
+
+                    </Modal>
+
+                <Text style={styles.infoText}>What is your predicted activity level?</Text>
+                    <TouchableOpacity
+                        onPress={() => changeActivityLevelVisibility(true)}
+                        style={styles.touchableOpacity}
+                    >
+                        <Text style={styles.optionText}>{chooseActivityLevel}</Text>
+
+                    </TouchableOpacity>
+
+                    {/*Controls the pop-up picker for activity level*/}
+                    <Modal
+                        transparent={true}
+                        animationType='fade'
+                        visible={isActivityLevelVisible}
+                        nRequestClose={() => changeActivityLevelVisibility(false)}
+                    >
+                        <ActivityLevelPicker
+                            changeModalVisibility={changeActivityLevelVisibility}
+                            setData={setActivityLevel}
+                        />
+
+                    </Modal>
+
                 <Text style={styles.infoText}> {"\n\n"}You're all set!{"\n"}Let's go to the home page </Text>
                 <TouchableOpacity style={styles.button} onPress={handleFinishButtonPress}>
                     <Text style={styles.buttonText}>Finish</Text>
@@ -153,6 +228,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    touchableOpacity: {
+        borderRadius: 25,
+        backgroundColor: '#ffffff',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        alignItems: 'center',
     },
 })
 

@@ -30,7 +30,7 @@ const GoalPicker = (props) => {
             onPress={() => props.changeModalVisibility(false)}
             style={styles.container}
         >
-            <View style={[styles.modal, {width: WIDTH - 300, height: HEIGHT / 2}]}>
+            <View style={[styles.modal, {width: WIDTH - 280, height: HEIGHT / 4}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export {AgePicker}
+export {GoalPicker}

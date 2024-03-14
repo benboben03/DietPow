@@ -9,7 +9,7 @@ const BasicInputScreen = ({navigation}) => {
     console.log("BasicInfoInput rendered");
 
     const [chooseAge, setChooseAge] = useState('Select Age')
-    const [chooseGender, setChooseGender] = useState('Select Gender')
+    const [chooseGender, setChooseGender] = useState('Select Sex')
     const [isAgeVisible, setIsAgeVisible] = useState(false)
     const [isGenderVisible, setIsGenderVisible] = useState(false)
     const [name, setName] = useState("")
@@ -46,7 +46,7 @@ const BasicInputScreen = ({navigation}) => {
     }
 
     const setGender = (option) => {
-        console.log("User chose gender: ");
+        console.log("User chose sex: ");
         console.log(option);
         setChooseGender(option);
     }
