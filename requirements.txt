@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-dotenv
+motor
+pydantic
+pymongo
+openai
+axios
+@react-navigation/native
+@react-navigation/stack
+@react-navigation/bottom-tabs
+react-native-vector-icons
+react-chartjs-2
+expo-status-bar
+react-native-chart-kit
+redux
