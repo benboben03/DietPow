@@ -18,7 +18,7 @@ const ActivityPicker = (props) => {
             <TouchableOpacity
                 style={styles.option}
                 key={index}
-                onPress={() => onPressItem(item)} // item or option
+                onPress={() => onPressItem(item)}
             >
                 <Text style={styles.text}>
                     {item}

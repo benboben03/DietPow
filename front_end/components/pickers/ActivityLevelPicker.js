@@ -5,7 +5,7 @@ const OPTIONS = ['sedentary', 'lightly active', 'moderately active', 'very activ
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-const AgePicker = (props) => {
+const ActivityLevelPicker = (props) => {
     const onPressItem = (option) => {
         props.changeModalVisibility(false);
         props.setData(option);

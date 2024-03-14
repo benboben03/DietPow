@@ -10,7 +10,7 @@ const OPTIONS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
     '61', '62', '63', '64', '65', '66', '67', '68', '69', '70',
     '71', '72', '73', '74', '75', '76', '77', '78', '79', '80']
 
-const WIDTH = Dimensions.get('window').width - 4;
+const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const AgePicker = (props) => {
     const onPressItem = (option) => {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modal: {
-        backgroundColor: '#F3F3F3FF',
+        backgroundColor: '#f3f3f3',
         borderRadius: 10
     },
     option: {

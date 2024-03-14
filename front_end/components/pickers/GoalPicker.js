@@ -5,7 +5,7 @@ const OPTIONS = ['lose weight', 'maintain weight', 'gain weight']
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-const AgePicker = (props) => {
+const GoalPicker = (props) => {
     const onPressItem = (option) => {
         props.changeModalVisibility(false);
         props.setData(option);
