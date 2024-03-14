@@ -6,7 +6,6 @@ const OPTIONS = ['Male', 'Female', 'Non-specified']
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const GenderPicker = (props) => {
-
     const onPressItem = (option) => {
         props.changeModalVisibility(false);
         props.setData(option);
