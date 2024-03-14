@@ -3,11 +3,12 @@ import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, TextInput, SafeAreaView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {AgePicker} from './pickers/AgePicker';
 import {GenderPicker} from './pickers/GenderPicker';
-import api from './api';
+import { useDispatch } from 'react-redux';
+
 
 const BasicInputScreen = ({navigation}) => {
     console.log("BasicInfoInput rendered");
-
+    const dispatch = useDispatch();
     const [chooseAge, setChooseAge] = useState('Select Age')
     const [chooseGender, setChooseGender] = useState('Select Gender')
     const [isAgeVisible, setIsAgeVisible] = useState(false)
@@ -61,6 +62,7 @@ const BasicInputScreen = ({navigation}) => {
         console.log("User entered text for email: ");
         console.log(text);
         setEmail(text);
+        dispatch({type: 'SET_EMAIL', payload: text})
     }
 
     return (

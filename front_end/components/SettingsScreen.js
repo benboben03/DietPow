@@ -1,8 +1,12 @@
 import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import React, {useState} from "react";
+import {useSelector} from 'react-redux';
 
 const SettingsScreen = () => {
     console.log("SettingsScreen rendered");
+
+    const userEmail = useSelector(state => state.userEmail);
+    console.log("User email: " + userEmail);
 
     const [newGoal, setNewGoal] = useState("")
     const handleGoalTextChange = (text) => {

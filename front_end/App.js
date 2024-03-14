@@ -1,9 +1,12 @@
 import React from 'react';
 import AppNavigator from './components/AppNavigator.js';
+import {Provider} from 'react-redux';
+import store from './store.js';
 
-export default function App() {
-    return (
-        console.log("App Started"),
-            <AppNavigator/>
-    );
-}
+const App = () => (
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  );
+
+  export default App;

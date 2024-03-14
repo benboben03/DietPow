@@ -1,7 +1,6 @@
 import {StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {useState, useEffect} from "react";
 import api from './api';
-import axios from 'axios';
 
 const AdvancedInfoScreen = ({onIntroComplete, route}) => {
     console.log("AdvancedInfoInput rendered");
@@ -34,38 +33,23 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
         setGoal(text);
     }
 
-    // const handleFinishButtonPress = () => {
-    //     console.log("Button pressed (AdvancedInfoInput -> HomeScreen)");
-    //     console.log(height);
-    //     console.log(weight);
-    //     console.log(goal);
-    //     onIntroComplete();
-    // }
+
     const handleFinishButtonPress = async () => {
         console.log("Button pressed (AdvancedInfoInput -> HomeScreen)");
         const userInfo = {
-            name,
-            email,
-            age: parseInt(age, 10), // Ensure age is an integer
-            gender,
-            weight: parseFloat(weight), // Ensure weight is a float
-            height: parseFloat(height), // Ensure height is a float
-            activity_level: '', // This should be handled accordingly
-            goal
+            'name': name,
+            'email': email,
+            'age': age,
+            'gender': gender,
+            'weight': weight,
+            'height': height,
+            'target_weight': goal,
+            "activity_level": "sedentary",
+            "goal": "lose",
         };
         console.log(userInfo);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/user/', {
-                'name': name,
-                'email': email,
-                'age': age,
-                'gender': gender,
-                'weight': weight,
-                'height': height,
-                'target_weight': goal,
-                "activity_level": "sedentary",
-                "goal": "lose",
-            });
+            const response = await api.post('/api/user/', userInfo);
             if (response.status === 200) {
                 const data = response.data;
                 console.log('User created:', data);
@@ -79,6 +63,30 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
 
         }
     };
+    //     try {
+    //         // Try to fetch the user first
+    //         const fetchResponse = await api.get(`/api/user/${email}`);
+            
+    //         if (fetchResponse.status === 200 && fetchResponse.data) {
+    //             // User exists, send a PUT request to update
+    //             const updateResponse = await api.put(`/api/user/${email}`, userInfo);
+    //             console.log('User updated:', updateResponse.data);
+    //             onIntroComplete();
+    //         } else {
+    //             throw new Error('User not found, creating a new one.');
+    //         }
+    //     } catch (error) {
+    //         if (error.response && error.response.status === 404) {
+    //             // User does not exist, send a POST request to create
+    //             const createResponse = await api.post('/api/user/', userInfo);
+    //             console.log('User created:', createResponse.data);
+    //             onIntroComplete();
+    //         } else {
+    //             // Handle other errors
+    //             console.error('Error:', error);
+    //         }
+    //     }
+    // };
 
 
     return (

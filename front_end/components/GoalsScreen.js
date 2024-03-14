@@ -1,15 +1,17 @@
 import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState} from "react";
+import { useSelector } from 'react-redux';
 
 const GoalsScreen = () => {
 
     const [goalWeight, setGoalWeight] = useState(0.0);
     const [goalTime, setGoalTime] = useState(0);
-
+    const userEmail = useSelector(state => state.userEmail);
     // TODO get goal weight from back-end
     // TODO get goal time estimate from back-end
 
     console.log("GoalsScreen rendered");
+    console.log("User email: " + userEmail);
 
     return (
         <SafeAreaView style={styles.container}>

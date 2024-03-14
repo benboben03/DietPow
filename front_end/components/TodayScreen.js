@@ -1,10 +1,14 @@
 import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAwareScrollView, Modal} from 'react-native';
 import React, {useState} from "react";
 import {ActivityPicker} from './pickers/ActivityPicker';
+import { useSelector } from 'react-redux';
 
 
 const TodayScreen = () => {
     console.log("TodayScreen rendered");
+
+    const userEmail = useSelector(state => state.userEmail);
+    console.log("User email: " + userEmail);    
 
     const [breakfastCalories, setBreakfastCalories] = useState(0)
     const handleBreakfastCaloriesTextChange = (calories) => {

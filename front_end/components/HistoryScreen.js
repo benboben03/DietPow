@@ -2,10 +2,14 @@ import React, {useState} from 'react';
 import {statusBar} from 'expo-status-bar';
 import {Modal, StyleSheet, View, Text, TextInput, Dimensions, SafeAreaView, Keyboard, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
+import { useSelector } from 'react-redux';
 
 
 const HistoryScreen = () => {
     console.log("HistoryScreen rendered");
+    
+    const userEmail = useSelector(state => state.userEmail);
+    console.log("User email: " + userEmail);
 
     {/* Instance and constant variables related to the date field */}
     const [isPickerShow, setIsPickerShow] = useState(false);
