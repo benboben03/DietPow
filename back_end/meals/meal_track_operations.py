@@ -4,20 +4,6 @@ from typing import List
 from meals.meal_track_db import add_meal, get_meals_by_day, get_meal_by_date_and_type
 from datetime import datetime
 
-# class MealTime(str, Enum):
-#     BREAKFAST = 'Breakfast'
-#     LUNCH = 'Lunch'
-#     DINNER = 'Dinner'
-#     SNACKS = 'Snacks'
-
-# class EachFood(BaseModel):
-#     meal_time: MealTime
-#     description: str
-#     calorie_count: int
-
-# class FoodTrack(BaseModel):
-#     email: EmailStr
-#     eaten_food: Dict[datetime, List[EachFood]] = {}
 
 router = APIRouter()
 

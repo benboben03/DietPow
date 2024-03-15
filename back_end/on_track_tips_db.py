@@ -1,4 +1,4 @@
-from mongodb_connection import client
+from mongodb_connection_sync import client
 from datetime import datetime
 
 user_database = client.UserInfo
