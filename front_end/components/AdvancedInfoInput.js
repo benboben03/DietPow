@@ -82,21 +82,21 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
             "goal": "lose",
         };
         console.log(userInfo);
-        // try {
-        //     const response = await api.post('/api/user/', userInfo);
-        //     if (response.status === 200) {
-        //         const data = response.data;
-        //         console.log('User created:', data);
-        //         onIntroComplete(); // Or navigate to the home screen
-        //     } else {
-        //         console.error('Failed to create user:', response.statusText);
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error);
-        //     console.error('Error making API call:', error.response ? error.response.data : error.message);
+        try {
+            const response = await api.post('/api/user/', userInfo);
+            if (response.status === 200) {
+                const data = response.data;
+                console.log('User created:', data);
+                onIntroComplete(); // Or navigate to the home screen
+            } else {
+                console.error('Failed to create user:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            console.error('Error making API call:', error.response ? error.response.data : error.message);
 
-        // }
-        onIntroComplete(); // Or navigate to the home screen
+        }
+        // onIntroComplete(); // Or navigate to the home screen
     };
 
 
