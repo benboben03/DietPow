@@ -1,6 +1,8 @@
 import {StyleSheet, Text, SafeAreaView, View, Dimensions} from 'react-native';
 import {LineChart} from "react-native-chart-kit";
-import React from "react";
+import React, { useState, useEffect }  from "react";
+import api from './api';
+
 
 const chartHeight = 110;
 
@@ -28,14 +30,26 @@ const data = {
 
 const HomeScreen = () => {
     console.log("HomeScreen rendered");
+    const [quote, setQuote] = useState("");
 
+    useEffect(() => {
+        fetchQuoteOfTheDay();
+    }, []);
+
+    const fetchQuoteOfTheDay = async () => {
+        try {
+            const response = await api.get('/api/quote-of-the-day/');
+            setQuote(response.data.quote);
+        } catch (error) {
+            console.error("Error fetching quote:", error);
+        }
+    };
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topSection}>
                 <Text style={styles.quoteHeaderText}>Today's Quote</Text>
 
-                {/*TODO pull quotes from database*/}
-                <Text style={styles.quoteText}>"Take care of your body, it's the only place you have to live in."</Text>
+                <Text style={styles.quoteText}>{quote}</Text>
 
                 <Text style={styles.titleText}>Your Health Home</Text>
             </View>

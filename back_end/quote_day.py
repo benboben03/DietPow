@@ -45,6 +45,7 @@ def quote_of_the_day():
         )
         response = completion.choices[0].message.content.strip()
         response_hash = quote_hash(response)
+        print(response)
         
         # Prevent duplicate quotes
         if collection.find_one({"hash": response_hash}) is None and collection.find_one({"quote": response}) is None:
@@ -61,15 +62,14 @@ async def get_quote_of_the_day():
     if quote_document:
         return {"quote": quote_document["quote"]}
     else:
-        # Here you should insert your logic to select a new quote and add it to the database
-        # This is where you'd use your `quote_of_the_day` function or similar logic
-        # For simplicity, this example won't implement the complete logic of selecting a new quote
-        new_quote = "This is a new quote. Actual quote selection not implemented in this example."
-        new_quote_hash = quote_hash(new_quote)
-        collection.insert_one({"quote": new_quote, "hash": new_quote_hash, "date": today.isoformat()})
-        return {"quote": new_quote}
+        # Generate a new quote and store it in the database
+        new_quote = quote_of_the_day()
+        # Store the new quote in the database
+        collection.insert_one({"quote": new_quote["quote"], "hash": new_quote["hash"], "date": today.isoformat()})
+        return new_quote
 
 
-if __name__ == "__main__":
-    for i in range(1, 120):
-        quote_of_the_day()
+
+# if __name__ == "__main__":
+#     for i in range(1, 120):
+#         quote_of_the_day()
