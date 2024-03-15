@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from user_info.user_operations import router as user_router
 from user_info.weight_track_operation import router as weight_track_router
 from activities.activities_track_operations import router as activities_router
+from quote_day import router as quote_router
 from meals.meal_track_operations import router as meals_router
+
 
 '''
 To check FastAPI pip install uvicorn, go to this directory (cd back_end/database)
@@ -27,6 +29,7 @@ app.include_router(user_router, prefix="/api")
 app.include_router(weight_track_router, prefix="/api")
 app.include_router(activities_router, prefix="/api")
 app.include_router(meals_router, prefix="/api")
+app.include_router(quote_router, prefix="/api")
 
 
 @app.get("/")

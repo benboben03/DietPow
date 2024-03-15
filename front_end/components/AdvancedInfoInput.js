@@ -77,45 +77,22 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
             "goal": "lose",
         };
         console.log(userInfo);
-        try {
-            const response = await api.post('/api/user/', userInfo);
-            if (response.status === 200) {
-                const data = response.data;
-                console.log('User created:', data);
-                onIntroComplete(); // Or navigate to the home screen
-            } else {
-                console.error('Failed to create user:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            console.error('Error making API call:', error.response ? error.response.data : error.message);
+        // try {
+        //     const response = await api.post('/api/user/', userInfo);
+        //     if (response.status === 200) {
+        //         const data = response.data;
+        //         console.log('User created:', data);
+        //         onIntroComplete(); // Or navigate to the home screen
+        //     } else {
+        //         console.error('Failed to create user:', response.statusText);
+        //     }
+        // } catch (error) {
+        //     console.error('Error:', error);
+        //     console.error('Error making API call:', error.response ? error.response.data : error.message);
 
-        }
+        // }
+        onIntroComplete(); // Or navigate to the home screen
     };
-    //     try {
-    //         // Try to fetch the user first
-    //         const fetchResponse = await api.get(`/api/user/${email}`);
-            
-    //         if (fetchResponse.status === 200 && fetchResponse.data) {
-    //             // User exists, send a PUT request to update
-    //             const updateResponse = await api.put(`/api/user/${email}`, userInfo);
-    //             console.log('User updated:', updateResponse.data);
-    //             onIntroComplete();
-    //         } else {
-    //             throw new Error('User not found, creating a new one.');
-    //         }
-    //     } catch (error) {
-    //         if (error.response && error.response.status === 404) {
-    //             // User does not exist, send a POST request to create
-    //             const createResponse = await api.post('/api/user/', userInfo);
-    //             console.log('User created:', createResponse.data);
-    //             onIntroComplete();
-    //         } else {
-    //             // Handle other errors
-    //             console.error('Error:', error);
-    //         }
-    //     }
-    // };
 
 
     return (

@@ -1,7 +1,11 @@
 from gpt_connection import client as gpt_client
 from random import choice
-from mongodb_connection import client as mongodb_client
+from mongodb_connection_sync import client as mongodb_client
 import hashlib
+from fastapi import APIRouter, HTTPException
+from datetime import datetime
+
+router = APIRouter()
 
 database = mongodb_client.NotificationQuotes
 collection = database.quote_day
@@ -44,9 +48,27 @@ def quote_of_the_day():
         
         # Prevent duplicate quotes
         if collection.find_one({"hash": response_hash}) is None and collection.find_one({"quote": response}) is None:
-            collection.insert_one({"quote": response, "hash": response_hash})
             print(response)
-            break
+            return {"quote": response, "hash": response_hash}
+            
+
+@router.get("/quote-of-the-day/")
+async def get_quote_of_the_day():
+    # Find a quote that has today's date or create a new one if it doesn't exist
+    today = datetime.now().date()
+    quote_document = collection.find_one({"date": today.isoformat()})
+
+    if quote_document:
+        return {"quote": quote_document["quote"]}
+    else:
+        # Here you should insert your logic to select a new quote and add it to the database
+        # This is where you'd use your `quote_of_the_day` function or similar logic
+        # For simplicity, this example won't implement the complete logic of selecting a new quote
+        new_quote = "This is a new quote. Actual quote selection not implemented in this example."
+        new_quote_hash = quote_hash(new_quote)
+        collection.insert_one({"quote": new_quote, "hash": new_quote_hash, "date": today.isoformat()})
+        return {"quote": new_quote}
+
 
 if __name__ == "__main__":
     for i in range(1, 120):
