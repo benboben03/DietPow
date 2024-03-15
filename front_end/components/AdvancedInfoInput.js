@@ -138,7 +138,7 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
                     onChangeText={handleWeightTextChange}
                 />
 
-                <Text style={styles.infoText}> {"\n\n"}What is your weight goal? </Text>
+                <Text style={styles.infoText}>What weight do you want to attain?</Text>
                 <TextInput
                     style={styles.input}
                     keyboardType={'numeric'}

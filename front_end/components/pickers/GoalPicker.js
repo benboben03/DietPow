@@ -30,7 +30,7 @@ const GoalPicker = (props) => {
             onPress={() => props.changeModalVisibility(false)}
             style={styles.container}
         >
-            <View style={[styles.modal, {width: WIDTH - 280, height: HEIGHT / 4}]}>
+            <View style={[styles.modal, {width: WIDTH - 280, height: HEIGHT / 3}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>

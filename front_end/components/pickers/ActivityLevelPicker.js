@@ -30,7 +30,7 @@ const ActivityLevelPicker = (props) => {
             onPress={() => props.changeModalVisibility(false)}
             style={styles.container}
         >
-            <View style={[styles.modal, {width: WIDTH - 280, height: HEIGHT / 2}]}>
+            <View style={[styles.modal, {width: WIDTH - 200, height: HEIGHT / 2}]}>
                 <ScrollView>
                     {option}
                 </ScrollView>
