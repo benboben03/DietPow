@@ -1,5 +1,30 @@
-import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
+import {StyleSheet, Text, SafeAreaView, View, Dimensions} from 'react-native';
+import {LineChart} from "react-native-chart-kit";
 import React from "react";
+
+const chartHeight = 110;
+
+    const chartConfig = {
+        backgroundColor: "#ff7300",
+        backgroundGradientFrom: "#ff7300",
+        backgroundGradientTo: "#ffa726",
+        decimalPlaces: 2,
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        style: {
+            borderRadius: 16
+        }
+    };
+
+{/* Weight datapoints for past few days */}
+const data = {
+    labels: ["3/2/2024", "3/3/2024", "3/4/2024", "3/5/2024", "3/6/2024", "3/7/2024", "3/8/2024"],
+    datasets: [
+        {
+            data: [190, 183, 175, 177, 178, 172, 172],
+            strokeWidth: 2,
+        },
+    ],
+};
 
 const HomeScreen = () => {
     console.log("HomeScreen rendered");
@@ -15,14 +40,32 @@ const HomeScreen = () => {
                 <Text style={styles.titleText}>Your Health Home</Text>
             </View>
             <View style={styles.bottomSection}>
+                {/* Goals summary */}
                 <View style={styles.summaryBox}>
                     <Text style={styles.summaryHeaderText}>Your Goals</Text>
+                        <Text style={styles.summaryText}>Target Weight: 160 lbs</Text>
+                        <Text style={styles.summaryText}>Est. Time to Completion: 3 weeks</Text>
+                        <Text style={styles.normalText}>Remember to consistently stay active!</Text>
                 </View>
+
+                {/* Progress summary */}
                 <View style={styles.summaryBox}>
                     <Text style={styles.summaryHeaderText}>Today's Progress</Text>
+                    <Text style={styles.summaryText}>Weight: 170 lbs     Active Time: 30 mins</Text>
+                    <Text style={styles.summaryText}>Calories Consumed: 2000</Text>
+                    <Text style={styles.summaryText}>Calories Burned: 1000</Text>
                 </View>
+
+                {/* History summary */}
                 <View style={styles.summaryBox}>
                     <Text style={styles.summaryHeaderText}>History Snapshot</Text>
+                    <LineChart
+                        data={data}
+                        width={styles.chartStyle.width}
+                        height={chartHeight}
+                        chartConfig={chartConfig}
+                        style={styles.chartStyle}
+                    />
                 </View>
             </View>
         </SafeAreaView>
@@ -77,7 +120,21 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'white',
         fontWeight: 'bold'
-    }
+    },
+    summaryText: {
+        fontSize: 17,
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    normalText: {
+        fontSize: 15,
+        color: 'white',
+        // fontWeight: 'bold'
+    }, 
+    chartStyle: {
+        width: Dimensions.get("window").width - 32,
+        borderRadius: 16
+    },
 })
 
 export default HomeScreen;

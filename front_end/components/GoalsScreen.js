@@ -23,18 +23,25 @@ const GoalsScreen = () => {
                     {/*Display target weight*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.goalText}>Target Weight: </Text>
-                        <Text style={styles.text}>{goalWeight}</Text>
+                        <Text style={styles.text}>160</Text>
                         <Text style={styles.text}> lbs</Text>
                     </View>
 
                     {/*Display time to completion*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.goalText}>Est. time to goal: </Text>
-                        <Text style={styles.text}>{goalTime}</Text>
+                        <Text style={styles.text}>3</Text>
                         <Text style={styles.text}> wks</Text>
                     </View>
 
-                    <Text style={styles.goalText}> TODO </Text>
+                    <Text style={styles.titleText}>You're on track!</Text>
+                    <Text style={styles.goalText}>Tips for reaching your goal:</Text>
+                    <Text style={styles.tipText}>{'\u2B24'} Take things one at a time</Text>
+                    <Text style={styles.tipText}>{'\u2B24'} Break goals down into steps</Text>
+                    <Text style={styles.tipText}>{'\u2B24'} Focus on yourself, not others</Text>
+                    <Text style={styles.tipText}>{'\u2B24'} Reward yourself when you make progress</Text>
+                    <Text style={styles.tipText}>{'\u2B24'} Don't pay too much attention to immediate results</Text>
+                    <Text style={styles.goalText}>"Setting goals is the first step in turning the invisible into the visible"{"\n"}     - Tony Robbins</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -74,6 +81,11 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 25,
+        color: 'white',
+        marginBottom: 10,
+    },
+    tipText: {
+        fontSize: 20,
         color: 'white',
         marginBottom: 10,
     },
