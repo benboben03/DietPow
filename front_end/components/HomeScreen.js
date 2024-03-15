@@ -147,7 +147,9 @@ const styles = StyleSheet.create({
     }, 
     chartStyle: {
         width: Dimensions.get("window").width - 32,
-        borderRadius: 16
+        borderRadius: 16,
+        marginLeft: -9,
+        marginTop: 13,
     },
 })
 

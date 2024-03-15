@@ -2,10 +2,13 @@ import {StyleSheet, Modal, Text, TextInput, SafeAreaView, TouchableOpacity, Touc
 import {useState, useEffect} from "react";
 import { ActivityLevelPicker } from './pickers/ActivityLevelPicker';
 import {GoalPicker} from './pickers/GoalPicker';
+import { useDispatch } from 'react-redux';
 import api from './api';
 
 const AdvancedInfoScreen = ({onIntroComplete, route}) => {
     console.log("AdvancedInfoInput rendered");
+    const dispatch = useDispatch();
+
     // Get the basic info from the previous screen
     const { basicInfo } = route.params;
     const name = basicInfo.name;
@@ -16,6 +19,7 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
     const [weight, setWeight] = useState(0.0);
     const [height, setHeight] = useState(0.0);
     const [goal, setGoal] = useState(0.0);
+    
 
     // Added information for Losing, Gaining, or Maintaining weight
     const [chooseWeightGoal, setChooseWeightGoal] = useState('Select weight goal')
@@ -60,6 +64,7 @@ const AdvancedInfoScreen = ({onIntroComplete, route}) => {
         console.log("User entered text for goal: ");
         console.log(text);
         setGoal(text);
+        dispatch({ type: 'SET_TARGET_WEIGHT', payload: text });
     }
 
 

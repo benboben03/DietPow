@@ -1,17 +1,56 @@
 import {StyleSheet, Text, SafeAreaView, View, TextInput, TouchableOpacity} from 'react-native';
-import React, {useState} from "react";
+import React, { useState, useEffect }  from "react";
 import { useSelector } from 'react-redux';
+import api from './api';
 
 const GoalsScreen = () => {
 
-    const [goalWeight, setGoalWeight] = useState(0.0);
     const [goalTime, setGoalTime] = useState(0);
+    const [tips, setTips] = useState([]);
+    const [track, setTrack] = useState([]);
+    const [quote, setQuote] = useState("");
+
+
+    // Fetch user email and target_weight from redux store
     const userEmail = useSelector(state => state.userEmail);
-    // TODO get goal weight from back-end
-    // TODO get goal time estimate from back-end
+    const targetWeight = useSelector(state => state.targetWeight);
 
     console.log("GoalsScreen rendered");
     console.log("User email: " + userEmail);
+
+    useEffect(() => {
+        fetchGoalData();
+    }, []); // Fetch data when component mounts
+
+    const fetchGoalData = async () => {
+        try {
+            // Fetch estimated time to goal
+            const goalTimeResponse = await  api.get(`/api/days-to-goal?email=${userEmail}`);
+            setGoalTime(goalTimeResponse.data.days_to_goal);
+
+            // Fetch tips/health track
+            const tipsResponse = await api.get(`/api/health-tip?email=${userEmail}`);
+            setTips(tipsResponse.data.tip);
+            setTrack(tipsResponse.data.health_level);
+
+        } catch (error) {
+            console.error('Error fetching goal data:', error);
+        }
+    };
+
+
+    useEffect(() => {
+        fetchQuoteOfTheDay();
+    }, []);
+
+    const fetchQuoteOfTheDay = async () => {
+        try {
+            const response = await api.get('/api/quote-of-the-day/');
+            setQuote(response.data.quote);
+        } catch (error) {
+            console.error("Error fetching quote:", error);
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -23,25 +62,22 @@ const GoalsScreen = () => {
                     {/*Display target weight*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.goalText}>Target Weight: </Text>
-                        <Text style={styles.text}>160</Text>
+                        <Text style={styles.text}>{targetWeight}</Text>
                         <Text style={styles.text}> lbs</Text>
                     </View>
 
                     {/*Display time to completion*/}
                     <View style={styles.inputContainer}>
                         <Text style={styles.goalText}>Est. time to goal: </Text>
-                        <Text style={styles.text}>3</Text>
-                        <Text style={styles.text}> wks</Text>
+                        <Text style={styles.text}>{goalTime}</Text>
+                        <Text style={styles.text}> days</Text>
                     </View>
 
-                    <Text style={styles.titleText}>You're on track!</Text>
+                    <Text style={styles.titleText}>{track}</Text>
                     <Text style={styles.goalText}>Tips for reaching your goal:</Text>
-                    <Text style={styles.tipText}>{'\u2B24'} Take things one at a time</Text>
-                    <Text style={styles.tipText}>{'\u2B24'} Break goals down into steps</Text>
-                    <Text style={styles.tipText}>{'\u2B24'} Focus on yourself, not others</Text>
-                    <Text style={styles.tipText}>{'\u2B24'} Reward yourself when you make progress</Text>
-                    <Text style={styles.tipText}>{'\u2B24'} Don't pay too much attention to immediate results</Text>
-                    <Text style={styles.goalText}>"Setting goals is the first step in turning the invisible into the visible"{"\n"}     - Tony Robbins</Text>
+                    {/* Display tips */}
+                    <Text style={styles.tipText}>{tips}</Text>
+                    <Text style={styles.quoteText}>{quote}</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -85,9 +121,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     tipText: {
-        fontSize: 20,
+        fontSize: 25,
         color: 'white',
-        marginBottom: 10,
+        marginBottom: 60,
+    },
+    quoteText: {
+        fontSize: 22,
+        color: 'white',
+        marginBottom: 50,
+        fontStyle: 'italic',
+        fontWeight: 'bold'
     },
     blueBackdrop: {
         backgroundColor: '#0A9BCB',
